@@ -1,0 +1,121 @@
+Added in API level 1 (/guide/topics/manifest/uses-sdk-element#ApiLevels)Array
+IndexOutOfBoundsException
+public class ArrayIndexOutOfBoundsException
+extends IndexOutOfBoundsException (/reference/java/lang/IndexOutOfBoundsException)
+java.lang.Object (/reference/java/lang/Object)
+    ↳ java.lang.Throwable (/reference/java/lang/Throwable)
+      ↳ java.lang.Exception (/reference/java/lang/Exception)
+        ↳ java.lang.RuntimeException (/reference/java/lang/RuntimeException)
+          ↳ java.lang.IndexOutOfBoundsException
+ (/reference/java/lang/IndexOutOfBoundsException)
+            ↳ java.lang.ArrayIndexOutOfBoundsException
+Thrown to indicate that an array has been accessed with an illegal index. The index is
+either negative or greater than or equal to the size of the array.
+Summary
+Public constructors
+ArrayIndexOutOfBoundsException
+ (/reference/java/lang/ArrayIndexOutOfBoundsException#ArrayIndexOutOfBoundsException())()
+Constructs an ArrayIndexOutOfBoundsException with no detail message.
+ArrayIndexOutOfBoundsException
+ (/reference/java/lang/ArrayIndexOutOfBoundsException#ArrayIndexOutOfBoundsException(int))(int
+index)
+Constructs a new ArrayIndexOutOfBoundsException class with an argument indicating the illegal 
+ArrayIndexOutOfBoundsException
+ (/reference/java/lang/ArrayIndexOutOfBoundsException#ArrayIndexOutOfBoundsException(java.lang.S
+(String (/reference/java/lang/String) s)
+Constructs an ArrayIndexOutOfBoundsException class with the specified detail message.
+Inherited methods
+final void addSuppressed
+ (/reference/java/lang/Throwable#
+(Throwable (/reference/java/lang
+Appends the specified exception 
+order to deliver this exception.
+Throwable (/reference/java/lang/Throwable)fillInStackTrace (/reference/
+Fills in the execution stack trace.
+Throwable (/reference/java/lang/Throwable)getCause (/reference/java/lang/T
+Returns the cause of this throwab
+unknown.
+String (/reference/java/lang/String)getLocalizedMessage
+ (/reference/java/lang/Throwable#
+Creates a localized description of 
+String (/reference/java/lang/String)getMessage (/reference/java/lang
+Returns the detail message string
+StackTraceElement[] (/reference/java/lang/StackTraceElement)getStackTrace (/reference/java
+Provides programmatic access to 
+printStackTrace() (/referenceFrom class java.lang.Throwable (/reference/java/lang/Throwable)
+
+final Throwable[] (/reference/java/lang/Throwable)getSuppressed (/reference/java
+Returns an array containing all of 
+by the try-with-resources statem
+Throwable (/reference/java/lang/Throwable)initCause (/reference/java/lang/
+(Throwable (/reference/java/lang
+Initializes the cause of this throwa
+voidprintStackTrace (/reference/ja
+Prints this throwable and its backt
+voidprintStackTrace
+ (/reference/java/lang/Throwable#
+(PrintWriter (/reference/java/i
+Prints this throwable and its backt
+voidprintStackTrace
+ (/reference/java/lang/Throwable#
+(PrintStream (/reference/java/i
+Prints this throwable and its backt
+voidsetStackTrace
+ (/reference/java/lang/Throwable#
+(StackTraceElement[] (/refere
+stackTrace)
+Sets the stack trace elements that
+ (/reference/java/lang/Throwable#
+printStackTrace() (/reference
+related methods.
+String (/reference/java/lang/String) toString (/reference/java/lang/T
+Returns a short description of this
+Object (/reference/java/lang/Object)clone (/reference/java/lang/Object#clone())()
+Creates and returns a copy of this object.From class java.lang.Object (/reference/java/lang/Object)
+
+booleanequals (/reference/java/lang/Object#equals(java.lang
+ (/reference/java/lang/Object) obj)
+Indicates whether some other object is "equal to" this 
+voidfinalize (/reference/java/lang/Object#finalize())()
+Called by the garbage collector on an object wh en gar
+more references to the object.
+final Class (/reference/java/lang/Class)<?>getClass (/reference/java/lang/Object#getClass())()
+Returns the runtime class of this Object.
+inthashCode (/reference/java/lang/Object#hashCode())(
+Returns a hash code value for the object.
+final voidnotify (/reference/java/lang/Object#notify())()
+Wakes up a single thread that is waiting on this object
+final voidnotifyAll (/reference/java/lang/Object#notifyAll())(
+Wakes up all threads that are waiting on this object's m
+String (/reference/java/lang/String)toString (/reference/java/lang/Object#toString())()
+Returns a string representation of the object.
+final voidwait (/reference/java/lang/Object#wait(long,%20int))
+Causes the current thread to wait until it is awakened, 
+until a certain amount of real time has elapsed.
+final voidwait (/reference/java/lang/Object#wait(long))(long 
+Causes the current thread to wait until it is awakened, 
+until a certain amount of real time has elapsed.
+final void wait (/reference/java/lang/Object#wait())()
+Causes the current thread to wait until it is awakened, 
+Added in API level 1 (/guide/topics/manifest/uses-sdk-element#ApiLevels)
+Added in API level 1 (/guide/topics/manifest/uses-sdk-element#ApiLevels)
+Added in API level 1 (/guide/topics/manifest/uses-sdk-element#ApiLevels)Public constructors
+ArrayIndexOutOfBoundsException
+Constructs an ArrayIndexOutOfBoundsException with no detail message.
+ArrayIndexOutOfBoundsException
+Constructs a new ArrayIndexOutOfBoundsException class with an argument indicating
+the illegal index.
+The index is included in this exception's detail message. The exact presentation format of
+the detail message is unspecified.
+Parameters
+index int: the illegal index.
+ArrayIndexOutOfBoundsExceptionpublic ArrayIndexOutOfBoundsException ()
+public ArrayIndexOutOfBoundsException (int index)
+public ArrayIndexOutOfBoundsException (String (/reference/java/lang/String) s)
+Constructs an ArrayIndexOutOfBoundsException class with the specified detail
+message.
+Parameters
+s String: the detail message.
+Content and code samples on this page are subject to the licenses described in the Content License
+ (/license). Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+Last updated 2025-02-10 UTC.

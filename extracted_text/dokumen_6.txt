@@ -1,0 +1,205 @@
+Page 1 of 7
+C++ Exception Hand ling
+An ex ception is a problem that arises during the ex ecution of a progr am. A C++ ex ception is a
+response to an ex ceptional circumstance that arises while a progr am is running, such as an
+attempt to divide b y zero.
+Exceptions pro vide a w ay to tr ansfer control from one part of a progr am to another . C++ ex ception
+handling is built upon three k eywords: try, catch,  and throw .
+Assuming a block will r aise an ex ception, a method catches an ex ception using a combination of
+the try and catch  keywords. A try/catch block is placed around the code that might gener ate an
+exception. Code within a try/catch block is referred to as protected code, and the syntax for using
+try/catch as follows −
+try {
+   // protected code
+} catch( ExceptionName e1 ) {
+   // catch block
+} catch( ExceptionName e2 ) {
+   // catch block
+} catch( ExceptionName eN ) {
+   // catch block
+}throw  − A progr am throws an exception when a problem shows up. This is done using a
+throw  keyword.
+catch  − A progr am catches an exception with an exception handler at the place in a
+progr am where you want to handl e the problem. The catch  keyword indicates the catching
+of an ex ception.
+try − A try block identifies a block of code for which particular exceptions will be activated.
+It's followed b y one or more catch blocks. Home  Whiteboard  Graphing Calculator  Online Compilers  Practice  Articles  T
+Chapters Categories
+Page 2 of 7
+You can list down multiple catch  statements to catch different t ype of ex ceptions in case y our try
+block r aises more than one ex ception in different situations.
+Throwing Exceptions
+Exceptions can be thrown an ywhere within a code block using throw  statement. The oper and of
+the throw statement determines a t ype for the ex ception and can be an y expression and the t ype
+of the result of the expression determines the t ype of ex ception thrown.
+Example
+Following is an example of throwing an ex ception when dividing b y zero condition occurs −
+double division (int a, int b) {
+   if( b == 0 ) {
+      throw "Division by zero condition!" ;
+   }
+   return (a/b);
+}
+Catching Exceptions
+The catch  block following the try block catches an y exception. Y ou can specif y what t ype of
+exception y ou want to catch and this is determined b y the ex ception declar ation that appears in
+parentheses following the k eyword catch.Advertisement
+
+Page 3 of 7
+try {
+   // protected code
+} catch( ExceptionName e ) {
+  // code to handle ExceptionName exception
+}
+Above code will catch an ex ception of ExceptionName  type. If y ou want to specif y that a catch
+block should handle an y type of ex ception that is thrown in a try block, y ou must put an ellipsis,
+..., between the parentheses enclosing the ex ception declar ation as follows −
+try {
+   // protected code
+} catch(...) {
+  // code to handle any exception
+}
+Example
+The following is an example, which throws a division b y zero ex ception and we catch it in catch
+block.
+#include <iostream>
+using namespace  std;
+double division (int a, int b) {
+   if( b == 0 ) {
+      throw "Division by zero condition!" ;
+   }
+   return (a/b);
+}
+int main () {
+   int x = 50;
+   int y = 0;
+   double z = 0;
+ 
+   try {
+      z = division (x, y);
+      cout << z << endl;
+   } catch (const char* msg) {
+Page 4 of 7
+     cerr << msg << endl;
+   }
+   return 0;
+}
+Because we are r aising an ex ception of t ype const char* , so while catching this ex ception, we
+have to use const char* in catch block. If we compile and run abo ve code, this would produce the
+following result −
+Division by zero condition!
+C++ Standard Exceptions
+C++ pro vides a list of standard ex ceptions defined in <exception>  which we can use in our
+progr ams. These are arr anged in a parent -child class hier archy shown below −
+Here is the small description of each ex ception mentioned in the abo ve hier archy −
+Sr.No Exception & Description
+Page 5 of 7
+1std::exception
+An ex ception and parent class of all the standard C++ ex ceptions.
+2std::bad_alloc
+This can be thrown b y new.
+3std::bad_cast
+This can be thrown b y dynamic_cast .
+4std::bad_exception
+This is useful device to handle unexpected ex ceptions in a C++ progr am.
+5std::bad_typeid
+This can be thrown b y typeid .
+6std::logic_error
+An ex ception that theoretically can be detected b y reading the code.
+7std::domain_error
+This is an ex ception thrown when a mathematically in valid domain is used.
+8std::invalid_argument
+This is thrown due to in valid arguments.
+9std::length_error
+This is thrown when a too big std::string is created.
+10std::out_of_range
+This can be thrown b y the 'at' method, for example a std::v ector and
+std::bitset<>::oper ator[]().
+11std::runtime_error
+An ex ception that theoretically cannot be detected b y reading the code.
+12std::overflow_error
+This is thrown if a mathematical o verflow occurs.
+13std::range_error
+This is occurred when y ou try to store a v alue which is out of r ange.
+14std::underflow_error
+This is thrown if a mathematical underflow occurs.
+Deﬁne New Exceptions
+You can define y our own ex ceptions b y inheriting and o verriding exception  class functionalit y.
+Example
+Page 6 of 7
+TOP TUTORIALS
+Python T utorial
+Java Tutorial
+C++ T utorial
+C Progr amming T utorialTRENDING TECHNOLOGIES
+Cloud Computing T utorial
+Amaz on Web Services T utorial
+Microsoft Azure T utorial
+Git TutorialFollowing is the example, which shows how y ou can use std::ex ception class to implement y our
+own ex ception in standard w ay −
+#include <iostream>
+#include <exception>
+using namespace  std;
+struct MyException  : public exception  {
+   const char * what () const throw () {
+      return "C++ Exception" ;
+   }
+};
+ 
+int main() {
+   try {
+      throw MyException ();
+   } catch(MyException & e) {
+      std::cout << "MyException caught"  << std::endl;
+      std::cout << e.what() << std::endl;
+   } catch(std::exception & e) {
+      //Other errors
+   }
+}
+This would produce the following result −
+MyException caught
+C++ Exception
+Here, what()  is a public method pro vided b y exception class and it has been o verridden b y all the
+child ex ception classes. This returns the cause of an ex ception.
+Page 7 of 7
+C# Tutorial
+PHP T utorial
+R Tutorial
+HTML T utorial
+CSS Tutorial
+JavaScript T utorial
+SQL T utorialEthical Hacking T utorial
+Docker Tutorial
+Kubernetes T utorial
+DSA Tutorial
+Spring Boot T utorial
+SDLC Tutorial
+Unix T utorial
+CERTIFICATIONS
+Business Analytics Certification
+Java & Spring Boot Adv anced Certification
+Data Science Adv anced Certification
+Cloud Computing And DevOps
+Advanced Certification In Business Analytics
+Artificial Intelligence And Machine Learning
+DevOps Certification
+Game Dev elopment Certification
+Front-End Dev eloper Certification
+AWS Certification T raining
+Python Progr amming CertificationCOMPILERS & EDITORS
+Online Ja va Compiler
+Online Python Compiler
+Online Go Compiler
+Online C Compiler
+Online C++ Compiler
+Online C# Compiler
+Online PHP Compiler
+Online MA TLAB Compiler
+Online Bash T erminal
+Online SQL Compiler
+Online Html Editor
+ABOUT US |OUR TEAM |CAREERS |JOBS|CONT ACT US |TERMS OF USE |
+PRIVACY POLICY |REFUND POLICY |COOKIES POLICY |FAQ'S
+Tutorials P oint is a leading Ed T ech compan y striving to pro vide the best learning material on
+technical and non-technical subjects.
+© Cop yright 2025. All Rights R eserv ed.

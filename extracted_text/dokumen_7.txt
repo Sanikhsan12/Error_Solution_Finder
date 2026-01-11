@@ -1,0 +1,295 @@
+Page 1 of 10
+JavaScript - Errors & Exceptions Handling
+Error handling in Ja vaScript is a process to detect and handle errors that occurs during the
+execution of a progr am. Errors can be a syntax, runtime or logical errors. An error occurred during
+the ex ecution of the progr am is called a runtime error or an ex ception.
+In JavaScript, errors can occur due to progr amming mistak es, incorrect user input, etc. Errors can
+disrupt code ex ecution and lead to bad user experience. Effectiv e error & ex ception handling is
+required for building robust, reliable and user friendly applications in Ja vaScript.
+What is an Error?
+An error is an ev ent that occurs during the ex ecution of a progr am that prev ents it from continuing
+normally . Errors can be caused b y a variety of factors, such as syntax  errors, runtime  errors, and
+logical  errors.
+Syntax Errors
+Syntax errors, also called parsing errors , occur at compile time in tr aditional progr amming
+languages and at interpret time in Ja vaScript.
+For example, the following line causes a syntax error because it is missing a closing parenthesis.
+<script>
+   window.print();
+</script>
+When a syntax error occurs in Ja vaScript, only the code contained within the same thread as the
+syntax error is affected, and the rest of the code in other threads gets ex ecuted, assuming nothing
+in them depends on the code containing the error .
+Runtime Errors (Ex ceptions)
+Runtime errors, also called exceptions , occur during ex ecution (after compilation/interpretation). Home  Whiteboard  Graphing Calculator  Online Compilers  Practice  Articles  T
+Chapters Categories
+Page 2 of 10
+For example, the following line causes a runtime error because the syntax is correct here, but at
+runtime, it is trying to call a method that does not exist.
+<script>
+   window.printme();
+</script>
+Exceptions also affect the thread in which they occur , allowing other Ja vaScript threads to continue
+normal ex ecution.
+There are man y JavaScript runtime errors (ex ceptions), some are as follows −
+Logical Errors
+Logic errors can be the most difficult t ype of errors to tr ack down. These errors are not the result
+of a syntax or runtime error . Instead, they occur when y ou mak e a mistak e in the logic that driv es
+your script and do not get the expected result.
+For example, when y ou divide an y numeric v alue with 10, it returns undefined.
+<script>
+   let num = 10/0;
+</script>ReferenceError  − Trying to access an undefined v ariable/ method.
+TypeError  − Attempting an oper ation on incompatible data t ypes.
+RangeError  − A v alue ex ceeds the allowed r ange.
+Advertisement
+Page 3 of 10
+What is Error Handling?
+Whenev er any error occurs in the Ja vaScript code, the Ja vaScript engine stops the ex ecution of the
+whole code. If y ou handle such errors in the proper w ay, you can skip the code with errors and
+continue to ex ecute the other Ja vaScript code.
+You can use the following mechanisms to handle the error .
+The try...catch...ﬁnally Statement
+The latest v ersions of Ja vaScript added ex ception handling capabilities. Ja vaScript implements the
+try...catch...finally construct as well as the throw oper ator to handle ex ceptions.
+You can catch progr ammer -gener ated and runtime ex ceptions, but y ou cannot catch Ja vaScript
+syntax errors.
+Here is the try ...catch...finally block syntax −
+<script>
+   try {
+      // Code to run
+      [break;]
+   } 
+   catch ( e ) {
+      // Code to run if an exception occurs
+      [break;]
+   }
+   [ finally {
+      // Code that is always executed regardless of 
+      // an exception occurring
+   }]
+</script>
+The try block must be followed b y either exactly one catch block or one finally block (or one of
+both). When an ex ception occurs in the try block, the ex ception is placed in e and the catch block
+is executed. The optional finally block ex ecutes unconditionally after try/catch.try...catch...finally statements
+throw statements
+the onerror() ev ent handler propert y
+Custom Errors
+
+Page 4 of 10
+Example
+Here is an example where we are trying to call a non-existing function which in turn is r aising an
+exception.
+Let us try to catch this ex ception using try ...catch and displa y a user -friendly message. Y ou can
+also suppress this message, if y ou want to hide this error from a user .
+You can use finally block which will alw ays ex ecute unconditionally after the try/catch.
+<html>
+<head>
+<script>               
+   try {
+      var a = 100;
+      alert(myFunc(a));                  
+   }
+   catch (e) {
+      alert(e);
+   }
+   finally {
+      alert("Finally block will always execute!"  );
+   }
+</script>
+</head>
+<body>
+   <p>Exception handling using try...catch...finally statements </p>
+</body>
+</html>
+Output
+Exception handling using try...catch...finaly statements
+The throw Statement
+You can use throw statement to r aise y our built -in ex ceptions or y our customiz ed ex ceptions. Later
+these ex ceptions can be captured and y ou can tak e an appropriate action.
+Example
+Page 5 of 10
+The following example demonstr ates how to use a throw statement.
+<html>
+<head>
+<script>
+   function  myFunc() {
+      var a = 100;
+      var b = 0;
+      try {
+         if ( b == 0 ) {
+            throw( "Divide by zero error."  ); 
+         } else {
+            var c = a / b;
+         }
+      }
+      catch ( e ) {
+         alert("Error: "  + e );
+      }
+   }
+</script>      
+</head>
+<body>
+   <p>Click the following to see the result :</p>
+   <form>
+      <input type = "button"  value = "Click Me"  onclick = "myFunc();"  />
+   </form>
+</body>
+</html>
+Output
+Click the following to see the result:
+Click Me
+You can r aise an ex ception in one function using a string, integer , Boolean, or an object and then
+you can capture that ex ception either in the same function as we did abo ve, or in another function
+using a try ...catch block.
+Page 6 of 10
+The onerror Event Handler Property
+The onerror ev ent handler w as the first feature to facilitate error handling in Ja vaScript. The
+onerror is an ev ent handler propert y of the 'window' object, which automatically triggers when an y
+error occurs on an y element of the web page. Y ou can call the callback function when an y error
+occurs to handle the error .
+You can follow the syntax below to use the onerror ev ent handler propert y.
+window.onerror = errorhandler_func ;
+OR
+<ele onerror ="errorhandler_func()" > </ele>
+In the abo ve syntax, errorhandler_func() will be ex ecuted when an y error will occur .
+The onerror  event handler pro vides three pieces of information to identif y the exact nature of the
+error −
+Example
+In the code below , we added the onclick ev ent on the <input> element, and we called the
+myFunc() function when users click the input element. The m yFunc() function is not defined. So , it
+will throw an error .
+We used the 'onerror' ev ent handler to catch the error . In the callback function, we print the error
+message, file URL, and line number in the file where the error occurs.
+<html>
+<body>
+   <p> Click the following button to see the result :</p>
+   <form>
+      <input type = "button"  value = "Click Me"  onclick = "myFunc();"  />
+   </form>
+   <div id = "demo"> </div>
+   <script>
+      const output = document .getElementById ("demo");
+      window.onerror = function  (msg, url, line) {Error message  − The same message that the browser would displa y for the giv en error
+URL − The file in which the error occurred
+Line number  − The line number in the giv en URL that caused the error
+Page 7 of 10
+         output.innerHTML = "Error: "  + msg + "<br>";
+         output.innerHTML += "URL: " + url + "<br>";
+         output.innerHTML += "Line: "  + line + "<br>";
+      }
+   </script>
+</body>
+</html>
+Output
+Click the following button to see the result:
+Click Me
+Error: Uncaught ReferenceError: myFunc is not defined
+URL: file:///C:/Users/Lenovo/Desktop/intex.html
+Line: 5
+You can use an onerror method, as shown below , to displa y an error message in case there is an y
+problem in loading an image.
+<img src="myimage.gif"  onerror ="alert('An error occurred loading the image.')"  />
+You can use onerror with man y HTML tags to displa y appropriate messages in case of errors.
+The Ja vaScript Error Class and Error Object
+Whenev er any error occurs in the code, Ja vaScript throws an instance (object) of the error class.
+The error object contains the information about the error .
+Howev er, Error() is a generic constructor for all t ypes of errors, but different objects exist for
+different t ypes of errors.
+JavaScript Custom Errors
+You can also throw an error with the custom message using the Error() constructor .
+const customError = new Error(message);
+customError .name = "CustomError" ;
+Here, we ha ve created the 'Error' class instance and passed the 'message' as an argument. Also ,
+we ha ve changed the v alue of the 'name' propert y. Similarly , you can change the v alue of the
+'message' propert y if you don't w ant to pass it as an Error() constructor argument.
+Page 8 of 10
+JavaScript Error Object Reference
+JavaScript Error T ypes or Constructor
+JavaScript contains the below t ypes of errors. Y ou can also use it as a constructor to create a new
+error of the specific t ype.
+Error
+Type/ObjectDescription
+ErrorIt is a generic constructor for the error . You can also create custom errors
+by extending the Error object.
+SyntaxErrorThe instance of the S yntaxError is thrown when an y error is in the syntax.
+For example, missing parenthesis, in valid JSON, etc.
+ReferenceErrorThe reference error occurs when y ou try to access v ariables not defined in
+the current scope.
+TypeErrorWhen the t ypes of the v ariables is not v alid, Ja vaScript throws the t ype
+error.
+RangeError When numeric input is out of r ange, it throws the r ange error .
+URIErrorJavaScript throws the URIError when y ou pass in valid arguments to the
+decodeURI or encodeURI methods.
+EvalError Deprecated.
+AggregateErrorIt is used to aggregate multiple error objects into a single error object, and
+it allows y ou to handle multiple error objects.
+Error Object Properties
+The Error object contains the two properties.
+Property Description
+name It is used to set or get an error name.
+message It is used to set or get an error message.
+Non-Standard Properties and Methods
+Here is the list of the non-standard properties and methods of the Error object. Howev er, they are
+not supported b y all browsers. So , you should a void using them.
+Page 9 of 10
+TOP TUTORIALS
+Python T utorial
+Java Tutorial
+C++ T utorial
+C Progr amming T utorial
+C# Tutorial
+PHP T utorial
+R Tutorial
+HTML T utorial
+CSS Tutorial
+JavaScript T utorial
+SQL T utorialTRENDING TECHNOLOGIES
+Cloud Computing T utorial
+Amaz on Web Services T utorial
+Microsoft Azure T utorial
+Git Tutorial
+Ethical Hacking T utorial
+Docker Tutorial
+Kubernetes T utorial
+DSA Tutorial
+Spring Boot T utorial
+SDLC Tutorial
+Unix T utorial
+CERTIFICATIONS
+Business Analytics Certification
+Java & Spring Boot Adv anced Certification
+Data Science Adv anced Certification
+Cloud Computing And DevOps
+Advanced Certification In Business Analytics
+Artificial Intelligence And Machine LearningCOMPILERS & EDITORS
+Online Ja va Compiler
+Online Python Compiler
+Online Go Compiler
+Online C Compiler
+Online C++ Compiler
+Online C# CompilerProperty Description
+columnNumber It is supported in the Firefo x browser only .
+description It is supported in the Microsoft browser only .
+displa yName It is supported in the Firefo x browser only .
+fileName It is supported in the Firefo x browser only .
+lineNumber It is supported in the Firefo x browser only .
+number It is supported in the Microsoft browser only .
+stack It is supported in the Firefo x browser only .
+internalError() It is supported in the Firefo x browser only .
+toSource() It is a Non Standard method of the Error object.
+Page 10 of 10
+DevOps Certification
+Game Dev elopment Certification
+Front-End Dev eloper Certification
+AWS Certification T raining
+Python Progr amming CertificationOnline PHP Compiler
+Online MA TLAB Compiler
+Online Bash T erminal
+Online SQL Compiler
+Online Html Editor
+ABOUT US |OUR TEAM |CAREERS |JOBS|CONT ACT US |TERMS OF USE |
+PRIVACY POLICY |REFUND POLICY |COOKIES POLICY |FAQ'S
+Tutorials P oint is a leading Ed T ech compan y striving to pro vide the best learning material on
+technical and non-technical subjects.
+© Cop yright 2025. All Rights R eserv ed.

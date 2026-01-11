@@ -1,0 +1,85 @@
+FAQ Login Register
+Home‹Board index‹Support‹Bug Reports Search…
+Post Reply Search this topic…5 posts • Page 1 of 1Error Dictionary changed size during iteration.(/)Support Forum (/)
+Quick links
+
+   
+nobrumski
+Newbie
+Posts: 19
+Joined: May 14th, 2010, 9:07 pm
+Error Dictionary changed size during
+iteration.
+ by nobrumski » March 23rd, 2016, 11:34 pm
+Latest release, v1.0.0 running on Win10 - 64. Not sure what happened. I just
+happened to open the webui and saw the error.
+ERROR DURING SCHEDULER EXECUTION dictionary changed size during iteration
+Traceback (most recent call last):
+File "sabnzbd\utils\kronos.pyo", line 305, in __call__
+File "sabnzbd\utils\kronos.pyo", line 399, in execute
+File "sabnzbd\bpsmeter.pyo", line 461, in midnight_action
+File "sabnzbd\bpsmeter.pyo", line 449, in midnight
+RuntimeError: dictionary changed size during iteration
+sander
+Release Testers
+Posts: 9402
+Joined: January 22nd, 2008, 2:22 pmRe: Error Dictionary changed size during
+iteration.
+ by sander » March 24th, 2016, 3:15 am
+What happens afterwards? Does SAB continue, or does SAB crash & stop?
+The relevant code is:
+CODE: SELECT ALL
+    def midnight(self):
+        """ Midnight action: dummy update for all servers """
+        for server in self.day_total:
+            self.update(server)
+The error comes from this line
+CODE: SELECT ALL
+for server in self.day_total:
+I think that the for loop starts, and then some other process changes the dictionary
+length, and the for loop has a problem. If so, this is a race condition.
+The error message is reproducible with
+Post Reply 5 posts • Page 1 of 1
+Return to “Bug Reports”
+Home‹Board index Delete cookies
+Flat Style by Ian Bradley • Powered by phpBB® Forum Software © phpBB LimitedCODE: SELECT ALL
+d = {'a': [1], 'b': [1], 'c': [3], 'd':[3333] }
+for i in d:
+print i
+d.pop(i)
+CODE: SELECT ALL
+Traceback (most recent call last):
+  File "python-dictionary-spelen.py", line 9, in <module>
+    for i in d:
+RuntimeError: dictionary changed size during iteration
+shypike
+Administrator
+Posts: 19774
+Joined: January 18th, 2008, 12:49
+pm
+Re: Error Dictionary changed size during
+iteration.
+ by shypike » March 24th, 2016, 6:34 am
+Could be that servers are switched on or off during a bps cycle.
+I'll have a closer look at this.
+It must be a very rare error; the code has been like this for many years.
+nobrumski
+Newbie
+Posts: 19
+Joined: May 14th, 2010, 9:07 pm
+Re: Error Dictionary changed size during
+iteration.
+ by nobrumski » March 24th, 2016, 7:55 am
+It didn't seem to affect SABnzbd at all and it has kept working.
+shypike
+Administrator
+Posts: 19774
+Joined: January 18th, 2008, 12:49
+pm
+Re: Error Dictionary changed size during
+iteration.
+ by shypike » March 24th, 2016, 8:44 am
+It may have caused a crash of the BPS-meter which may have
+(at least temporarily) disturbed the speedometer and the download statistics.
+Nothing grave, but it should be fixed anyway.
+    

@@ -1,0 +1,123 @@
+ Please read our Community Guidelines  that are tailored to this space in addition to the Python
+Software Foundation Code of Conduct that we’re bound by .
+Reach out to @moderators with any questions.
+olivia olivia_olivia Jun 2024
+I have already run anaconda as an administrator , but it still shows “PermissionError: [Errno 13]
+Permission denied”.
+I thought it was because the folder attribute is read-only , so i tried several ways to change this
+such as CMD checks and powershell checks but the folder still shows read-only . The windows
+support said that this was not the issue and the display of read-only is something can’t be
+changed.
+So what am i suppose to do next. Thanks.
+Cornelius Krupp MegaIng Jun 2024
+What code are you executing to get this error?
+olivia olivia_olivia Jun 2024
+import sys
+print(sys.executable)
+import wave
+import json
+import os
+import threading
+import sounddevice as sd
+from scipy.io.wavfile import write
+import keyboard
+from vosk import Model, KaldiRecognizer
+import numpy as np
+standard_text = "hello python hello world"
+def record_audio(file_path):
+    fs = 16000
+    save_dir = os.path.dirname(file_path)
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+        print(f"Directory created: {save_dir}")
+    else:
+        print(f"Directory already exists: {save_dir}")
+    recording = threading.Event()“PermissionError: [Errno 13] Permission denied”in
+windows
+Skip to last replySkip to topSkip to main content
+    def on_press(key):
+        nonlocal recording
+        if key.name == 'esc':
+            print("Start recording...")
+            recording.set()
+        elif key.name == 'enter':
+            print("Stop recording...")
+            recording.clear()
+    keyboard.on_press(on_press)
+    print("Press ESC key to start recording, press Enter key to stop...")
+    recording.wait()
+    frames = []
+    def callback(indata, frames, time, status):
+        frames.append(indata.copy())
+    with sd.InputStream(samplerate=fs, channels=1, callback=callback):
+        recording.wait()
+    if len(frames) > 0:
+        write(file_path, fs, np.concatenate(frames))
+        print(f"File saved at: {file_path}")
+    else:
+        print("No audio frames recorded, recording failed!")
+    keyboard.unhook_all()
+def recognize_speech(file_path):
+    if not os.path.exists("model"):
+        print("Please download the model and place it in the current 
+directory.")
+        return ""
+    wf = wave.open(file_path, "rb")
+    if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getframerate() != 
+16000:
+        print("Unsupported audio format")
+        return ""
+    model = Model("model")
+    rec = KaldiRecognizer(model, wf.getframerate())
+    rec.SetWords(True)
+    results = []
+    while True:
+        data = wf.readframes(4000)
+        if len(data) == 0:
+            break
+        if rec.AcceptWaveform(data):
+            results.append(rec.Result())
+        else:
+            results.append(rec.PartialResult())
+    results.append(rec.FinalResult())
+    wf.close()
+    text = ""Skip to last replySkip to topSkip to main content
+I’m new here and don’t know much about the format. If there is anything inappropriate, please let
+me know . Thank you.    for result in results:
+        result_dict = json.loads(result)
+        if 'text' in result_dict:
+            text += result_dict['text'] + " "
+    return text.strip()
+def compare_texts(recorded_text, standard_text):
+    differences = []
+    recorded_tokens = recorded_text.split()
+    standard_tokens = standard_text.split()
+    for i in range(min(len(recorded_tokens), len(standard_tokens))):
+        if recorded_tokens[i] != standard_tokens[i]:
+            differences.append((i, recorded_tokens[i], standard_tokens[i]))
+    return differences
+def main():
+    file_path = r"D:\Project\guben\record_save"
+    record_audio(file_path)
+    recorded_text = recognize_speech(file_path)
+    print("Recorded text:", recorded_text)
+    differences = compare_texts(recorded_text, standard_text)
+    if differences:
+        print("Detected differences:")
+        for diff in differences:
+            print(f"Position {diff[0] + 1}: Recorded text '{diff[1]}' differs 
+from standard text '{diff[2]}'")
+Skip to last replySkip to topSkip to main content
+New & Unread Topics
+Topic Replies Views Activity
+Def (main) function not showing output. Process finished with exit code
+0
+help5 230 Jan 2025
+Failure to load module introcs 1 278 Jan 2025
+Why int is unbounded? 6 327 Feb 2025
+Python help: egg_info did not run successfully
+help4 839 Feb 2025
+How to actually avoid tutorial hell and get better in programming
+python and others
+help documentation1 180 Mar 2025
+Want to read more? Browse other topics in  or view latest topics.

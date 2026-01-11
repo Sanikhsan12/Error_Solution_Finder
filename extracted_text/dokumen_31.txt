@@ -1,0 +1,102 @@
+ArrayIndexOutOfBoundsException Class
+Definition
+Namespace: Java. Lang
+Assembly: Mono.Android.dll
+Thrown to indicate that an array has been accessed with an illegal index.
+C#
+Inheritance Exception →Throwable →Exception →RuntimeException →
+IndexOutOfBoundsException →ArrayIndexOutOfBoundsException
+Attributes Register Attribute
+Remarks
+Thrown to indicate that an array has been accessed with an illegal index. The index is either negative or
+greater than or equal to the size of the array.
+Added in 1.0.
+Java documentation for java.lang.ArrayIndexOutOfBoundsException .
+Portions of this page are modifications based on work created and shared by the Android Open Source
+Project  and used according to terms described in the Creative Commons 2.5 Attribution License.
+Constructors
+Array Index OutOfBounds Exception() Constructs an ArrayIndexOutOfBoundsException with no detail
+message.
+Array Index OutOfBounds Exception(Int32) Constructs a new ArrayIndexOutOfBoundsException class with an
+argument indicating the illegal index.
+Array Index OutOfBounds Exception(Int Ptr, Jni
+Handle Ownership)A constructor used when creating managed representations of JNI
+objects; called by the runtime.[Android.Runtime.Register( "java/lang/ArrayIndexOutOfBoundsException" , DoNotGenerateAcw=true) ]
+public class ArrayIndexOutOfBoundsException  : Java.Lang.IndexOutOfBoundsException
+ﾉExpand table
+Array Index OutOfBounds Exception(S tring) Constructs an ArrayIndexOutOfBoundsException class with the
+specified detail message.
+Fields
+is_generated (Inherited from Throwable )
+Properties
+Cause Returns the cause of this throwable or null if the cause is nonexistent or unknown.
+(Inherited from Throwable )
+Class (Inherited from Throwable )
+Handle The handle to the underlying Android instance.
+(Inherited from Throwable )
+JniIdentity Hash
+Code(Inherited from Throwable )
+JniPeerMembers
+Localized Message Creates a localized description of this throwable.
+(Inherited from Throwable )
+Message Returns the detail message string of this throwable.
+(Inherited from Throwable )
+PeerReference (Inherited from Throwable )
+StackTrace (Inherited from Throwable )
+Threshold Class This API supports the Mono for Android infrastructure and is not intended to be used directly
+from your code.
+Threshold Type This API supports the Mono for Android infrastructure and is not intended to be used directly
+from your code.
+Methods
+AddSuppressed(Throwable) Appends the specified exception to the exceptions that were suppressed in order
+to deliver this exception.ﾉExpand table
+ﾉExpand table
+ﾉExpand table
+(Inherited from Throwable )
+Dispose() (Inherited from Throwable )
+Dispose(Boolean) (Inherited from Throwable )
+FillInStackTrace() Fills in the execution stack trace.
+(Inherited from Throwable )
+GetStackTrace() Provides programmatic access to the stack trace information printed by
+#printStackTrace().
+(Inherited from Throwable )
+GetSuppressed() Returns an array containing all of the exceptions that were suppressed, typically by
+the try-with-resources statement, in order to deliver this exception.
+(Inherited from Throwable )
+InitCause(Throwable) Initializes the caus e of this throwable to the specified value.
+(Inherited from Throwable )
+Print StackTrace() Prints this throwable and its backtrace to the standard error stream.
+(Inherited from Throwable )
+Print StackTrace(Print Stream) Prints this throwable and its backtrace to the specified print stream.
+(Inherited from Throwable )
+Print StackTrace(Print Writer) Prints this throwable and its backtrace to the specified print writer.
+(Inherited from Throwable )
+SetHandle(Int Ptr, Jni Handle
+Ownership)Sets the Handle  property.
+(Inherited from Throwable )
+SetStackTrace(S tackTrace
+Element[])Sets the stack trace elements that will be returned by #getStackTrace() and printed
+by #printStackTrace() and related methods.
+(Inherited from Throwable )
+ToString() (Inherited from Throwable )
+Unregister From Runtime() (Inherited from Throwable )
+Explicit Interface I mplementations
+IJava Peerable. Disposed() (Inherited from Throwable )
+IJava Peerable. Dispose Unless Referenced() (Inherited from Throwable )
+IJava Peerable. Finalized() (Inherited from Throwable )
+IJava Peerable. JniManaged PeerState (Inherited from Throwable )
+IJava Peerable. SetJniIdentity Hash Code(Int32) (Inherited from Throwable )ﾉExpand table
+IJava Peerable. SetJniManaged PeerState(Jni Managed PeerStates) (Inherited from Throwable )
+IJava Peerable. SetPeerReference(Jni Object Reference) (Inherited from Throwable )
+Extension Methods
+JavaCast<TR esult>(IJava Object) Performs an Android runtime-checked type conversion.
+JavaCast<TR esult>(IJava Object)
+GetJniTypeName(IJava Peerable) Gets the JNI name of the type of the instance self.
+JavaAs<TR esult>(IJava Peerable) Try to coerce self to type TResult, checking that the coercion is valid on
+the Java side.
+TryJavaCast<TR esult>(IJava Peerable,
+TResult)Try to coerce self to type TResult, checking that the coercion is valid on
+the Java side.
+Applies to
+Product Versions
+.NET for Andr oid .NET for Android API 34, .NET for Android API 35, .NET for Android API 36ﾉExpand table

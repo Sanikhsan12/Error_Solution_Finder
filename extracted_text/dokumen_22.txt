@@ -1,0 +1,32 @@
+ Please read our Community Guidelines  that are tailored to this space in addition to the Python
+Software Foundation Code of Conduct that we’re bound by .
+Reach out to @moderators with any questions.
+Brett Dinzai Jan 2023
+To whom it may concern,
+Please read what I have to say before giving the usual response to this question. I have asked on
+multiple Discords after googling for Hours. I am to the point that i am writing on a Python forum to
+figure out what the issue could actually be. The screen shots linked will show that not only am I
+Admin on my PC, I also have enabled “Full Control” on the hard drive that the files are in. I have
+enabled every permission known to me. The files i am trying to read from the drive are indeed
+there, and the file location indeed does exist. I have no other editor open with those files, no
+excel, or Tiled program open. I have even ran Pycharm as Admin and get the same error . I have
+even gone as far as trying to open the files from my D: drive instead of my G: drive. I get the
+same error . All i am trying to accomplish is to open a “.tmx” from an export from Tiled to use what
+I made as a map in a pygame. I can send any and all Code relating to this in case my coding is
+the issue.
+I also restarted the Computer multiple times in case the files did not close properly in Tiled.
+As a new user , I can only upload one screenshot, I have several I need to share, so i am sharing
+the one that shows i am indeed an Admin so that can be cleared up that I have significant
+permissions
+I appreciate you (anyone) taking the time to help me with this, especially near the holidays
+PermissionError [Errno 13] Permission denied Python
+2023
+Skip to last replySkip to topSkip to main content
+Skip to last replySkip to topSkip to main content
+Skip to last replySkip to topSkip to main content
+Skip to last replySkip to topSkip to main content
+Skip to last replySkip to topSkip to main content
+Skip to last replySkip to topSkip to main content
+Skip to last replySkip to topSkip to main content
+Skip to last replySkip to topSkip to main content
+Skip to last replySkip to topSkip to main content

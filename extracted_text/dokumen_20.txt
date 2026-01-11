@@ -1,0 +1,153 @@
+Explore your training options and get exclusive tuition discounts
+GET STARTED (HTTPS://CAREERKARMA.COM/FASTTRACK/?FROM=TOPROWBANNER)
+Resource Center (https://careerkarma.com/blog/)Python (https://careerkarma.com/blog/python/)
+Python typeerror: ‘int’ object is not iterable Solution 
+Python typeerror: ‘int’ object is not iterable
+Solution
+BY
+ JAMES GALLAGHER (HTTPS://CAREERKARMA.COM/BLOG/AUTHOR/JAMESGALLAGHER/)
+UPDATEDDECEMBER 1, 2023
+Encountering an error is not a problem; it’s a learning opportunity. While developing in
+Python, you may have seen an error “‘int’ object is not iterable”.
+What does this mean? How do I solve it? Those are the questions we’re going to
+answer in this article. We will discuss what the “‘int’ object is not iterable” error is, why
+it is raised, and how you can solve it.
+The Problem: typeerror: ‘int’ object is not
+iterable
+“typeerror: ‘int’ object is not iterable”
+There are two parts to this error message: TypeError and the error message.
+A TypeError is raised when a function is applied to an object of the wrong data type.
+For instance, if you try to apply a mathematical function to a string, or call a value like
+a function which is not a function, a TypeError is raised.
+The error message tells us that you have tried to iterate over an object that is not
+iterable (https://careerkarma.com/blog/python-iterator/). Iterable objects are items
+whose values you can access using a “for loop
+(https://careerkarma.com/blog/python-for-loop/)”.
+A Practice Scenario
+One of the most common scenarios in which this error is raised is when you try to use
+a for loop with a number. This mistake is made because it’s easy to forget to use the
+range() function (https://careerkarma.com/blog/python-range/) when you are using
+a for loop.
+Consider the following code snippet:
+(http://www.facebook.com/sharer.php?
+u=https%3A%2F%2Fcareerkarma.com%2Fblog%2Fpython-
+typeerror-
+int-
+object-
+is-not-
+iterable%2F)
+(https://twitter.com/intent/tweet?
+text=Python+typeerror%3A+%E2%80%98int%E2%80%99+object+is+not+iterable+Solution&url=https%3A%2F%2Fcareerkarma.com%2Fblog%2Fpython-
+typeerror-
+int-
+object-
+is-not-
+iterable%2F&via=career_karma)Find your bootcamp match
+Select Your Interest
+Artificial IntelligenceYour Experience
+BeginnerTime To Start
+Now GET MATCHED
+By completing and submitting this form, you agree that Career Karma Platform, LLC may deliver or cause to be delivered information,
+advertisements, and telemarketing messages regarding their services by email, call, text, recording, and message using a telephone
+system, dialer, automated technology or system, artificial or prerecorded voice or message device to your email and/or telephone
+number(s) (and not any other person’s email or telephone number) that you entered. Consent is not a condition of receiving
+information, receiving Career Karma services, or using the website, and you may obtain information by emailing
+info@careerkarma.com (mailto:info@careerkarma.com). Message & Data rates may apply. Message frequency may vary. Text STOP to
+unsubscribe. Terms of Service (https://careerkarma.com/terms-of-use) and Privacy Policy (https://privacy.careerkarma.com/privacy-
+policy) govern the processing and handling of your data.
+Apply to top tech
+training programs
+in one click
+GET MATCHED
+(https://careerkarma.com/fasttrack/?
+from=sidebar)
+(https://careerkarma.com/)
+(https://careerkarma.com/)X
+def count_occurrence(values, to_find):
+number_of_occurrences = 0
+for v in len(values):
+ifvalues[v] == to_find:
+number_of_occurrences += 1
+return number_of_occurrences
+values = [1, 2, 3, 3]
+check_for_threes = count_occurrence(values, 3)
+print(check_for_threes)
+This code snippet uses one function. The count_occurance function counts how
+many times a number appears in the “values” list. This function iterates over all the
+values in “values” and keeps a running total of all those equal to a particular number.
+This number is specified as a parameter called “to_find”.
+In our main program, we define a list called “values” with four values. We call our
+count_occurrence function to count how many threes are in our list of values. We
+then print out the response to the console.
+Let’s run our code:
+Traceback (most recent calllast):
+  File "main.py", line 9, in<module>
+check_for_threes = count_occurrence(values, 3)
+  File "main.py", line 3, in count_occurrence
+for v in len(values):
+TypeError: 'int' object isnot iterable
+Oh no! An error has been raised. Now that we’ve replicated this error, we can solve it.
+The Solution
+Our error tells us that we’ve tried to iterate over an object that is not iterable. If we
+look at the error message in detail, we can see it points us to the line where the
+problem occurs:
+for v in len(values):
+The problem with this line is that we are trying to iterate over a number.
+len(values) is equal to 4. That’s how many values are in the list
+(https://careerkarma.com/blog/python-array/) “values”. If we try to iterate over a
+number, nothing happens. This is because for loops only work with iterable objects.
+To solve this problem, we need to make sure our for loop iterates over an iterable
+object. We can add a range() statement to our code to do this:
+for v in range(len(values)):
+This statement will create an iterable object with a list of values in the range of 0 and
+the number of items in the “values” list.
+Let’s try to run our code again with the range() statement. Our code returns:
+2
+About the AuthorOur code has successfully found all the instances of 3 in the list. Our code has
+counted them all up and then printed the total number of times 3 appears in the list
+to the console.
+Conclusion
+TypeErrors are a common type of error in Python. They occur when you try to apply a
+function on a value of the wrong type. An “‘int’ object is not iterable” error is raised
+when you try to iterate over an integer value.
+To solve this error, make sure that you are iterating over an iterable rather than a
+number.
+Now you’re ready to solve this error like a Pythonista
+(https://careerkarma.com/blog/python-projects-beginners/)!
+About us: Career Karma is a platform designed to help job seekers find, research, and
+connect with job training programs to advance their careers. Learn about the CK
+publication (https://careerkarma.com/blog/about/).
+What's Next?
+WANT TO TAKE ACTION?
+Get matched with top bootcamps
+WANT TO DIVE DEEPER?
+Ask a question to our community
+( https://careerkarma.com/?utm_campaign=ck-blog&utm_source=whatsnext)
+WANT TO EXPLORE TECH CAREERS?
+Take our careers quiz
+( https://careerkarma.com/quiz?utm_campaign=ck-blog&utm_source=whatsnext)
+(/)
+Home (https://careerkarma.com/)
+About (https://careerkarma.com/blog/about/)
+Jobs (https://careerkarma.com/company/jobs/)
+Mission (https://careerkarma.com/company/values/)
+Resource Center (https://careerkarma.com/blog/)
+Press (https://careerkarma.com/company/press/)
+Terms & С onditions (https://careerkarma.com/terms-of-use/)
+Sitemap (https://careerkarma.com/blog/html-sitemap/)
+
+(https://www.facebook.com/CareerKarmaApp)
+(https://twitter.com/Career_Karma)
+(https://www.instagram.com/careerkarma)
+(https://www.youtube.com/careerkarma?
+sub_confirmation=1)
+© 2025 Career Karma
+James Gallagher
+(https://careerkarma.com/blog/author/jamesgallagher/)
+Technical Content Manager at Career Karma (https://careerkarma.com/)
+James Gallagher is a self-taught programmer and the technical content manager at
+Career Karma. He has experience in range of programming languages and extensive
+expertise in Python, HTML, CSS, and JavaScript. James has written hundreds of
+programming tuto... read more about the author
+(https://careerkarma.com/blog/author/jamesgallagher/)
+COMMENTS (0)

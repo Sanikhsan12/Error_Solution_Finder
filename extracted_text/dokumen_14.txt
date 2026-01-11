@@ -1,0 +1,72 @@
+How to solve “Unable to find git in
+your path” for flutter.
+Mutee Abdullah Follow 2 min read·Aug 27, 2023
+28 1
+when after installing flutter. we try to run it in VS code or Android Studio.
+Most of the time we get this error as stated above. there are two or more
+solutions to this. I am will discuss three possible solutions to this.
+Git is not installed.
+if you cant see git in your installed applications. then the best way to install
+git with minimum effort is with the help of chocolatey. Here is the reference
+how to install chocolatey on your system.
+After its installed simply write this command “choco install git.install” in
+your administrator shell. it will automatically install latest git for you and
+will automatically set the PATH in windows environment variables.
+Get Mutee Abdullah’s stories in your inbox
+Join Medium for free to get updates from this writer.
+Enter your email Subscribe
+Open in app Sign up Sign in
+Search Write
+
+Git is installed but there is still an error.
+then firstly you should check your path in environment variables. these
+three should be there
+C:\Program Files\Git\bin\git.exe;C:\Program Files\Git\cmd;C:\Windows\System32
+pasting these in environment variables will hopefully solve the problem or
+else find your path in your installed directory.
+Permissions problems.
+If every thing is set the final step could be to change the permissions for
+your IDE. for that right click your IDE application go to properties go to
+compatibility. and then check the option. “Run this program  as an
+adm inistrator”
+properties menu.
+This will solve the problem for you. Thanks
+Flutter Error
+Written by Mutee Abdullah
+2 followers·1 followingFollow
+Responses (1)
+Write a response
+Hevinmgolakiya
+Jun 4, 2024
+Thanks man, you fixed my problem
+Reply
+Recommended from Medium
+What are your thoughts?
+💡 Flutter Advanced Tips &
+Techniques Every Senior Develop…
+Flutter has matured far beyond just a cross-
+platform toolkit.  It’s now the core of multi-…
+5d agoIn by
+Add Seamless Google
+Authentication to Your Flutter Ap…
+Package: google_sign_in
+Nov 2, 2025
+Flutter GetX in 2025: A Complete
+Guide to State, Routing, and DI
+Introduction
+Aug 19, 2025In by
+Flutter December 2025 💙  Flutter
+Monthly
+Let’s dive into Flutter world!
+5d ago
+The Silent Killer in Your Flutter App How I Accidentally Made Money
+Writing CodeSofia ✨
+1PubDev Essentials Developer Hub
+Suraj Patil Flutter Taipei Yii Chen
+1
+Yash Patel Flutter Nik
+See more recomme ndationsBefore It Strikes… Eliminate Memory Leaks in
+Your App
+6d ago(No startup pitch. No guru mindset. Just one
+honest mistake that worked.)
+Jan 4 2

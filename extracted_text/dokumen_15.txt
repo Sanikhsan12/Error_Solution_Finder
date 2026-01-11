@@ -1,0 +1,134 @@
+Resolving the “CocoaPods
+Not Installed or Not in Valid
+State” Error
+Search …
+Recent Posts
+7 Screenshot and snapshot testing tools for mobile apps
+(https://www.repeato.app/screenshot-testing-tools/)
+32 On-premises mobile automation testing tools (https://www.repeato.app/on-
+premises-mobile-automation-testing-tools/)
+20 Free Android automation tools and services (https://www.repeato.app/free-
+android-automation-tools/)
+16 Cross platform mobile test automation tools (https://www.repeato.app/cross-
+platform-mobile-test-automation-tools/)
+13 Android automation services (https://www.repeato.app/android-automation-
+services/)
+12 Android automation tools (https://www.repeato.app/android-automation-tools/)
+Resolving the “xcrun: error: invalid active developer path” Error on macOS
+(https://www.repeato.app/resolving-the-xcrun-error-invalid-active-developer-path-
+error-on-macos/)
+Adding Existing Frameworks in Xcode 4: A Comprehensive Guide
+(https://www.repeato.app/adding-existing-frameworks-in-xcode-4-a-comprehensive-
+guide/)
+19 DECEMBER 2024 STEPHAN PETZL (HTTPS://WWW.REPEATO.APP/AUTHOR/STOEFLN/)
+TECH-HELP (HTTPS://WWW.REPEATO.APP/CATEGORY/TECH-HELP/)
+Encountering the “CocoaPods not installed or not in valid state” error can be a
+stumbling block for developers working with Flutter on iOS devices. This guide
+provides effective solutions to address this common issue.
+Understanding the Issue
+The error typically arises when there’s a discrepancy between the Ruby version used to
+install CocoaPods and the one currently in use. This can result in CocoaPods being
+installed but not functioning correctly, causing complications when launching
+applications on iOS devices.
+Recommended Solutions
+The following steps provide a structured approach to resolving the issue:
+Step 1: Reinstall CocoaPods
+Open your terminal and execute the following commands to uninstall and reinstall
+CocoaPods:
+sudo gem uninstall cocoapods && sudo gem install cocoapods
+Restart your Integrated Development Environment (IDE) or editor after reinstallation.
+Step 2: Verify and Update Resource Paths
+If the issue persists, ensure that your environment paths are correctly set:
+Check the following files for path configurations: ~/.profile , ~/.zshrc, and
+~/.bashrc .
+Ensure that the path to your configuration files is included in the ~/.profile  file.
+Step 3: Clean and Rebuild Your Project
+Navigate to your Flutter project directory and execute:
+flutter clean
+Then, run:
+flutter pub get
+Finally, attempt to run your project again using:
+flutter run
+Additional Recommendations
+If you continue to face issues, consider using virtual test devices
+(/documentation/virtual-test-devices/) or explore advanced testing techniques
+(/documentation/advanced-testing-techniques/) for further insights into resolving
+complex problems.
+Enhancing Your Testing Process with Repeato
+For developers seeking a streamlined approach to testing mobile applications, Repeato
+offers an efficient solution. As a no-code test automation tool for iOS and Android,
+Repeato allows you to create, run, and maintain automated tests quickly, leveraging
+computer vision and AI for enhanced accuracy. This can be particularly beneficial in
+scenarios where manual troubleshooting of errors like the CocoaPods issue is time-
+consuming.
+Explore more about Repeato’s capabilities in our Flutter Test Automation (/flutter-test-
+automation/) documentation.
+Like this article? there’s more where that came from!
+7 Screenshot and snapshot testing tools for mobile apps
+(https://www.repeato.app/screenshot-testing-tools/)
+32 On-premises mobile automation testing tools (https://www.repeato.app/on-
+premises-mobile-automation-testing-tools/)
+20 Free Android automation tools and services (https://www.repeato.app/free-
+android-automation-tools/)
+16 Cross platform mobile test automation tools (https://www.repeato.app/cross-
+platform-mobile-test-automation-tools/)
+13 Android automation services (https://www.repeato.app/android-automation-
+services/)
+(https://www.repeato.app/?utm_source=blog&utm_campaign=footer-banner)CHECK IT OUT! (HTTPS://WWW.REPEATO.APP/?UTM_SOURCE=BLOG&UTM_CAMPAIGN=FOOTER-BANNER)
+Repeato DocumentationSupport Legal
+Home
+(https://www.repeato.app/)
+Pricing
+(https://www.repeato.app/pricing/)
+Blog
+(https://www.repeato.app/blog/)
+FAQ
+(https://www.repeato.app/documentation/faq/)
+About us
+(https://www.repeato.app/about/)Getting started
+(https://www.repeato.app/documentation/getting-
+started/)
+Test exception
+handling
+(https://www.repeato.app/documentation/test-
+exception-
+handling/)
+Advanced testing
+techniques
+(https://www.repeato.app/documentation/advanced-
+testing-
+techniques/)
+JavaScript API
+(https://www.repeato.app/documentation/javascript-
+api/)
+Release notes
+(https://www.repeato.app/home/release-
+notes/)Support &
+Resources
+(https://www.repeato.app/support-
+resources/)
+Documentation
+(https://www.repeato.app/documentation/gett
+started/)
+Book a demo
+(https://calendly.com/stephan-
+petzl/15min)
+Contact
+(https://www.repeato.app/contact/)Imprint
+(https://www.repeato.ap
+Terms &
+Conditions
+(https://www.repeato.ap
+of-service/)
+Privacy policy
+(https://www.repeato.ap
+policy/)
+Cancel
+subscription
+(https://docs.google.co
+9by9rBn0uwVfGVg/view
+(https://sourceforge.net/software/product/Repeato/)[activecampaign form=5 css=0]
+g
+(skype:+43j
+(https:a
+(htt

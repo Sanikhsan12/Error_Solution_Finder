@@ -1,0 +1,7 @@
+PyPDF2
+pandas
+pyppeteer
+asyncio
+sentence-transformers 
+nltk 
+Flask

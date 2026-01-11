@@ -1,0 +1,510 @@
+Flutter Emulator Error Connecting to Service Protocol
+ Asked6 years, 8 months ago  Modified8 months ago  101k times Viewed
+67I am having an Issue with Flutter in Android studio, where whenever I run my flutter app, it will print this
+error; "Error connecting to the service protocol: HttpException: Connection closed before full header was
+received, uri = " , and it will "disconnect" from the app in the
+emulator. The app will still run, but I can't use functions like Hot R eload.http://127.0.0.1:53305/9So9Wn564F4=/ws
+I am on a Windows machine, and Flutter Doctor does not indicate any errors. I have tried to read up on
+similar issues on github posts, but I have been unable to resolve the problem.
+Do any of you guys have any ideas on how to solve this issue?
+The problem does not occur when running on an actual device, only in the emulator.
+andr oid-studio f lutt er andr oid-emulat or
+ShareImprove this questionFollow asked May 11, 2019 at 18:38
+Simon Olsen
+835 1715
+  Same! Which flutter version are you using? I'm using 1.5.4-hotfix.2. – Jches May 13, 2019 at 1:19
+  flutter_barcode_scan caused the error for me. Does anybody know a working barcode-package? – relascope May 11,
+2020 at 16:00
+  I just did a cold boot and it worked. – Tayyab Mazhar Feb 19, 2021 at 18:32
+1  I am facing the same issue, can it be related to the firewall i have on my Zorin OS(Ubuntu based) – DaniyalAhmadSE
+Jul 9, 2021 at 20:51
+  Try wiping emulator data – Muhammad F aizan Jul 27, 2021 at 7:17
+Report this adBy continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+Necessary cookies only
+Customize settings
+35 Answers Sorted by: Highest score (default)
+1 2 Next
+61A quick restart of the phone worked for me
+ShareImprove this answerFollow answered Sep 22, 2021 at 12:47
+William
+601 53
+Sign up to request clarification or add additional context in comments.
+4 Comments
+Add a comment
+João Ramires Over a year ago
+Ty, the restart also worked for me.
+1 R eply
+Rajesh Over a year ago
+Restarting the phone, Uninstalling the app, R estarting the pc, Cleaning the build folder solved the issue!
+0 R eply
+Najeeb Over a year ago
+This may happen if you enabled developer mode on your device but didn't reboot it before running your app on it.
+0 R eply
+Alexkin_Sky Jun 19, 2025 at 2:18
+Yeah! that worked for me too...
+0 R eply
+21If you return to a previous version of android, (Android Pie), you will no longer have this problem, it is
+related only to the latest versions of android (Q, 29), in others you will no longer have the problem.
+ShareImprove this answerFollow edited Jun 24, 2019 at 14:31 answered Jun 7, 2019 at 20:40
+Luan M Gepfrie
+479 311
+2 Comments
+Add a comment
+Oleksandr Y efymov Over a year ago
+Happens for me exactly for Android Pie//By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+2 R eply
+Nae Over a year ago
+I was able to overcome it by using 30+ API
+0 R eply
+14What exactly happened
+Hey I went into the same problem too. I cannot use a Emulator inside windows because my pc is a very
+low end pc. So, I had to use my phone instead. It is a Samsung Galaxy J2 Pro (SM-J210F) with Android
+. I used that phone to develop flutter apps regularly, but suddenly, I went
+to this problem.6.0.1 (Andr oid Mar shmallow)
+Here's what happened when I tried to run "Flutter Attach" in VS-Code(v1.52.0).
+command
+flutter attach --machine -d 420054e7960eb400
+exception
+StateError: Bad state: Existing VM service clients prevent DDS from taking control.
+Copy
+#      DartDevelopmentService.startDartDevelopmentService
+(package:flutter_tools/src//dds.dart::)
+<asynchronous suspension>
+#      FlutterDevice.connect.<anonymous closure>
+(package:flutter_tools/src/resident_runner.dart::)
+<asynchronous suspension>0
+base 8311
+1
+24911
+Fixing the issue (In Windows 10)
+So, I ran these commands to fix the issue.
+Fixing the Flutt er SDK
+-flutter clean -v
+-  ** (Optional if these didn't fix the issue) flutter channel stable
+-flutter upgrade -v
+-  (Disclaimer: It will download each and every version of all the
+packages. Be sure to have really fast internet or give at least an hour to this.)flutter pub cache r epair -vBy continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+Configur e your Pr oxy/VPN
+If you are using a Proxy or VPN to connect to the internet,
+Make sure that application isn't resolving localhost via that.(DNS)
+Kill ADB and Dar t processes.
+After that, kill adb and dart process on Windows.
+(I don't know exactly how to kill these in Mac/Linux. Sorry About That)
+Run these commands in the Command Prompt.
+*
+* (You can run " " too)taskkill /f /im dar t
+taskkill /f /im adb adb kill-ser ver
+Fixing the ADB in the Windows (*Optional).
+Navigate to "
+In my case, It is ( C:\Users\Isira Adithya.android )
+Then delete .%HOMEDRIVE%:\User s%USERNAME%.andr oid
+adbk ey
+Fixing the Andr oid Debugging in the Andr oid Device
+Disconnect the device from the computer.
+Go to  -> ,
+Turn off USB Debugging and Turn it on again.
+Revoke USB Debugging authorizations.
+Restart the device.Settings Developer Options
+Updat e Windows and Andr oid S ystem (If abov e didn 't solv e the pr oblem)
+Conclusion
+I think these steps should fix your problem.
+Also I am still 16 years old and I am not a very experienced developer.
+If these didn't fix, use this to get more info. Github Issue
+ShareImprove this answerFollow edited Jun 24, 2021 at 9:16
+NullByte08
+1,071 11 17answered Dec 31, 2020 at 16:40
+Isira Adithya
+344 28
+Comments
+Add a comment
+10Uninstall app in Emulator fixed same issue for meBy continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+ShareImprove this answerFollow answered Jan 20, 2020 at 8:30
+Mhmd Asaad
+114 14
+Comments
+Add a comment
+9I solved this problem by:
+turn off my phone.
+disconnect.
+turn on my phone.
+By doing this, you will restart the VM Service.
+ShareImprove this answerFollow answered Feb 1, 2022 at 19:49
+Mang Hartono
+318 58
+1 Comment
+Add a comment
+tomerpacific Over a year ago
+This does not provide an answer to the question. Once you have sufficient  you will be able to 
+; instead, . - reputation comment
+on any post provide answers that don't require clarification from the asker From R eview
+1 R eply
+5Sorry I don't know how you can solve it on  but for  users: Go to S ystem Preferences ->
+Network -> Click on your Phone -> Uncheck "Disable unless needed"Windo ws Mac Os
+By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+Thanks to https://github.com/flutter/flutter/issues/46698#issuecomment-565643127
+ShareImprove this answerFollow answered Jan 18, 2020 at 18:06
+Antoine Guerra
+441 36
+1 Comment
+Add a comment
+jaaq Over a year ago
+This sadly isn't related to fixing this problem when it occurs when using the emulator.
+1 R eply
+5For my case, I met the error when I used 3rd parties such as facebook_login, twitter_login incorrectly.
+To check:
+comment the libs from pubspec.yaml, corresponding code as well.
+To fix:
+update correctly config for the 3rd parties.By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+Hope this help.
+ShareImprove this answerFollow answered Apr 11, 2020 at 4:00
+Mr Special
+1,666 223 33
+5 Comments
+Add a comment
+Rutvik Gumasana Over a year ago
+can you please tell me how to fix it. because I am getting same error
+0 R eply
+Mr Special Over a year ago
+@RutvikGumasana: try commenting all of 3rd parties libs such as facebook, twitter..., code is using them as well.
+clean, reinstall app again
+0 R eply
+Rutvik Gumasana Over a year ago
+but i need to use this facebook libs. then how can I get out of this error?
+0 R eply
+Mr Special Over a year ago
+@RutvikGumasana u need to configure facebook plugin correctly. T o day, I try to integrate again. It runs well.
+0 R eply
+Theuno de Bruin Over a year ago
+When i ran the project in xcode i got a better error: Add a key named F acebookClientT oken to your Info.plist, and
+add your client token as its value. Adding this resolved my issue
+0 R eply
+4In virtual device manager, try one of these options.
+Copy
+Wipe Data
+Cold Boot Now
+ShareImprove this answerFollow answered Sep 2, 2020 at 9:24
+GoharSahiBy continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+714 112 30
+Comments
+Add a comment
+3Try
+flutter doct or -v
+I had faced same issue. So I run  command. flutter doct or -v
+Then I found the error
+✗ Andr oid licenses not accept ed. T o resolv e this, r un: f lutter doct or --andr oid-licenses.
+ this command resolved my issue. flutter doct or --andr oid-licenses
+ShareImprove this answerFollow answered Apr 22, 2021 at 14:39
+neel
+64 5
+Comments
+Add a comment
+3Turn on your Emulator. The Emulator would be switched off.
+ShareImprove this answerFollow answered Mar 14, 2023 at 5:30
+iamJohnv esly
+1,013 97
+Comments
+Add a comment
+2Try
+flutter run --r elease
+I faced the same issue after upgrading flutter 1.13 but the above command helped.
+ShareImprove this answerFollow answered Dec 27, 2019 at 13:07By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+krishna_tandon
+393 112
+1 Comment
+Add a comment
+Luis Alberto Delgado de la Flo Over a year ago
+Got this message while trying this solution 'R elease mode is not supported for emulators.'
+0 R eply
+2You can solv e it by r estar ting y our phone or emulat or.
+ShareImprove this answerFollow edited Jul 23, 2022 at 15:15 answered Jul 23, 2022 at 15:14
+ﺑﺮاء ﻣﺒﺎرك
+49 5
+1 Comment
+Add a comment
+Community Over a year ago
+Your answer could be improved with additional supporting information. Please  to add further details, such as
+citations or documentation, so that others can confirm that your answer is correct. Y ou can find more information on
+how to write good answers .edit
+in the help center
+0 R eply
+2If not all above them works for you.
+1. Remove android studio, reinstall and open Android S tudio
+2. Go to "More Actions"
+3. Go to "SDK Manager"
+4. Click "Android SDK"
+5. Click "SDK T ools"
+6. Untick Android SDK Command-line T ools(latest) apply and let the program delete the files.
+7. Go back tick Android SDK Command-line T ools(latest) and let the program download again.
+It just worked for me
+ShareImprove this answerFollow edited Sep 18, 2022 at 9:59
+lepsch
+10.5k 533 48answered Sep 13, 2022 at 21:37
+Onur Arda KARAKUM
+21 3
+CommentsBy continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+Add a comment
+1In my case, I just closed the simulator, and ran it again.
+ShareImprove this answerFollow answered Nov 6, 2020 at 11:17
+Jack'
+2,604 130 33
+Comments
+Add a comment
+1I had a simliar problem with ios with the error message 
+. I solved it by removing the app from the simulator and
+ran a clean in xcode, then it could build successfully from vs code!Error connecting to the service protocol:
+failed to connect to http://127.0.0.1:......
+ShareImprove this answerFollow answered Sep 22, 2021 at 7:20
+Jenny
+71 16
+Comments
+Add a comment
+1I had faced the same issue but the only thing which solved my problem is to uninstall the app on my
+physical phone and I again try to run. and truly its work.
+ShareImprove this answerFollow answered Jan 8, 2022 at 21:40
+Zia Ullah
+63 5
+1 Comment
+Add a comment
+shaderone Over a year ago
+Re-installing every single time is a real p ain
+1 R eplyBy continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+1If you are using  or higher it may be that you tried to emulate a  app but
+you don't have  installed.Flutter 2.10 Windows desktop
+Visual Studio - develop for Windows (Visual Studio Community 2022 17.1.0)
+Apparently, it won't let you emulate anything until you install VS. Run  to find out.flutter doctor
+ShareImprove this answerFollow answered Feb 22, 2022 at 21:44
+tazboy
+1,766 526 43
+Comments
+Add a comment
+1check if you have enough storage in your phone.
+I had the same problem and that was the reason.
+ShareImprove this answerFollow answered Apr 30, 2022 at 14:29
+Oldar Bakr
+11 1
+1 Comment
+Add a comment
+Community Over a year ago
+Your answer could be improved with additional supporting information. Please  to add further details, such as
+citations or documentation, so that others can confirm that your answer is correct. Y ou can find more information on
+how to write good answers .edit
+in the help center
+1 R eply
+1In my case :
+1- lock the emulator from the the normal screen locking button.
+2- unlock the emulator.
+3- Press the run button in Android studio.
+ShareImprove this answerFollow edited Mar 9, 2023 at 8:40 answered Mar 9, 2023 at 8:39
+Manar Abo-Haat
+31 2
+Comments
+Add a commentBy continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+1to my case after upgrading   to  version i had to add flutter_facebook_auth^3.5.0^5.0.8
+FacebookClientToken
+iOS
+Info.plist
+Copy
+<key>FacebookClientToken</key>
+<string>YOUR-TOKEN-HERE</string>
+https://developers.facebook.com/docs/ios/getting-started#configure-your-project
+Andr oid
+/app/manifests/AndroidManifest.xml 
+Copy
+<meta-data android:name=  android:value=
+/>"com.facebook.sdk.ClientToken" "YOUT TOKEN
+HERE"
+https://developers.facebook.com/docs/android/getting-started#configure-your-project
+ShareImprove this answerFollow answered Apr 5, 2023 at 19:50
+ali ozkara
+5,651 230 28
+Comments
+Add a comment
+1i got this error during run my flutter app no physical device: issue: Error connecting t o the ser vice
+protocol: failed t o connect t o http://127.0.0.1:54869/2CMr y_Tdav4=/
+Solution for this(it works for me): Just restart your physical device and turn off and again turn on USB
+debugging option from developer option on your device..!
+ShareImprove this answerFollow answered May 8, 2024 at 4:29
+jyorge maccaline
+97 113
+Comments
+Add a comment
+0It seems it can be different things. In my case, I removed a package I was using, barcode_scan.
+ShareImprove this answerFollow answered Mar 1, 2020 at 7:46By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+Dx_
+1,576 116 17
+Comments
+Add a comment
+0I have the same problem and I go to xcode -> window -> device & simulator, under Installed Apps I
+remove some apps and it works.
+ShareImprove this answerFollow answered May 5, 2020 at 2:04
+Quyen Anh Nguyen
+1,918 116 23
+Comments
+Add a comment
+0For me it was caused by flutter_facebook_login plugin causing issue i removed it and i could afford to
+remove facebook login option but in your case you can try different version of flutter_facebook_login or
+you can use different plugin for loggin in using facebook.
+ShareImprove this answerFollow answered Jun 2, 2020 at 7:22
+Zeeshan Mehdi
+1,469 119 18
+1 Comment
+Add a comment
+Allaye Over a year ago
+i just removed the facebook dependency and the app is working fine now
+0 R eply
+0Open the project in android studio => S tart your Emulator - OR - Connect your android device with
+Debug mode "on" => Run the Project on android studio => Run your project from VS code or from
+command line using flutter run
+ShareImprove this answerFollow answered Aug 11, 2020 at 4:27
+Shahid Sarwar
+1,209 115 32By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+Comments
+Add a comment
+0When I deleted the emulator in A VD Manager and rebuilt it, it worked.
+ShareImprove this answerFollow answered Sep 26, 2020 at 5:39
+noveleven
+635 818
+Comments
+Add a comment
+0For me, it was caused by phone screen saver. Emulator screen was locked. After I pressed on power icon,
+the screen opened. then I run it again and everything is working.
+ShareImprove this answerFollow edited Oct 1, 2020 at 14:15
+NearHuscarl
+83.1k 24 322 292answered Sep 30, 2020 at 23:28
+kadim kareem
+155 18
+Comments
+Add a comment
+0I have resolved this problem after add some code in android folder.
+1.Add below code in AndroidManifest.xml
+Copy
+<meta-data android:name=
+android:value= />
+<activity android:name=
+android:configChanges=
+android:label=  />
+<activity
+android:name=
+android:exported=>
+<intent-filter>
+<action android:name=  />
+<category android:name=  />
+<category android:name=  />"com.facebook.sdk.ApplicationId"
+"@string/facebook_app_id"
+"com.facebook.FacebookActivity"
+"keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+"@string/app_name"
+"com.facebook.CustomTabActivity"
+"true"
+"android.intent.action.VIEW"
+"android.intent.category.DEFAULT"
+"android.intent.category.BROWSABLE"By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+<data android:scheme=  />
+</intent-filter>
+</activity>"@string/fb_login_protocol_scheme"
+2.Add your F acebook app id in strings.xml
+Copy
+<string name= > </string>
+<string name= >fb380000000000000</string>"facebook_app_id"380000000000000
+"fb_login_protocol_scheme"
+3.Add dependencies in pubspec.yaml
+Copy
+flutter_facebook_login: ^1.1.1
+Pub get and run.
+ShareImprove this answerFollow answered Nov 3, 2020 at 7:36
+Dheerendra Mitm
+182 19
+Comments
+Add a comment
+0I was having the same error message. In my case, the problem was just a configuration that I changed in
+Runner.xcodeproj.
+Open runner.xcodeproj in Xcode, go to the General tab -> App Icons and Lauch Images -> "Launch
+Screen File". I had changed it to Main and that cause the error, changing back to "LaunchScreen" option
+solved the problem for me.
+ShareImprove this answerFollow answered Apr 20, 2021 at 13:14
+SandrSandro
+1
+Comments
+Add a comment
+0This happened to me too, the problem was I was using a vpn in my PC, I turned the vpn off, and
+everything just worked fine
+ShareImprove this answerFollow answered May 4, 2021 at 18:17
+thejufo
+153 17By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.
+Comments
+Add a comment
+1 2 Next
+. To answer this question, you need to have at least 10 reputation on this site (not counting the
+). The reputation requirement helps protect this question from spam and non-answer activity.Protected question
+association bonus
+Start asking t o get answ ers
+Find the answer to your question by asking.
+Ask question
+Explor e related questions
+andr oid-studio f lutt er andr oid-emulat or
+See similar questions with these tags.
+By continuing to use this website, you agree Stack Exchange
+can store cookies on your device and disclose information in
+accordance with our Cookie Policy. By exiting this window,
+default cookies will be accepted. To reject cookies, select an
+option from below.

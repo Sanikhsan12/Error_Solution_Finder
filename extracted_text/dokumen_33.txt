@@ -1,0 +1,99 @@
+ArithmeticException Class
+Definition
+Namespace: System
+Assemblies: netstandard.dll, S ystem.Runtime.dll
+Source: ArithmeticException.cs
+The exception that is thrown for errors in an arithmetic, casting, or conversion operation.
+C#
+Inheritance Object →Exception →SystemException →ArithmeticException
+Derived System. Divide ByZero Exception
+System. NotFinite Number Exception
+System. Overflow Exception
+Remarks
+ArithmeticException  is the base class for the following exceptions:
+DivideByZeroException , which is thrown in integer division when the divisor is 0. For example,
+attempting to divide 10 by 0 throws a DivideByZeroException  exception.
+NotFiniteNumberException , which is thrown when an operation is performed on or returns
+Double.NaN , Double.NegativeInfinity , Double.P ositiveInfinity , Single.NaN , Single.NegativeInfinity ,
+Single.P ositiveInfinity , and the programming language used does not support those values.
+OverflowException , which is thrown when the result of an operation is outside the bounds of the
+target data type. That is, it is less than a number's MinValue property or greater than its MaxValue
+property. For example, attempting to assign 200 + 200 to a Byte value throws an OverflowException
+exception, since 400 greater than 256, the upper bound of the Byte data type.
+Your code should not handle or throw this exception. Instead, you should either handle or throw one of
+its derived classes, since it more precisely indicates the exact nature of the error.
+For a list of initial property values for an instance of ArithmeticException , see the ArithmeticException
+constructors.
+ArithmeticException  uses the HRESUL T COR_E_ARITHMETIC, which has the value 0x80070216.
+public class ArithmeticException  : SystemException
+Constructors
+Name Descr iption
+Arithmetic Exception() Initializes a new instance of the ArithmeticException  class.
+Arithmetic Exception(Serialization Info,
+Streaming Context)Obsolet e.
+Initializes a new instance of the ArithmeticException  class with serialized data.
+Arithmetic Exception(S tring,
+Exception)Initializes a new instance of the ArithmeticException  class with a specified
+error message and a reference to the inner exception that is the cause of this
+exception.
+Arithmetic Exception(S tring) Initializes a new instance of the ArithmeticException  class with a specified
+error message.
+Properties
+Name Descr iption
+Data Gets a collection of key/value pairs that provide additional user-defined information about the
+exception.
+(Inherited from Exception )
+Help Link Gets or sets a link to the help file associated with this exception.
+(Inherited from Exception )
+HResult Gets or sets HRESUL T, a coded numerical value that is assigned to a specific exception.
+(Inherited from Exception )
+Inner
+ExceptionGets the Exception  instance that caused the current exception.
+(Inherited from Exception )
+Message Gets a message that describes the current exception.
+(Inherited from Exception )
+Source Gets or sets the name of the application or the object that causes the error.
+(Inherited from Exception )
+StackTrace Gets a string representation of the immediate frames on the call stack.
+(Inherited from Exception )
+Target Site Gets the method that throws the current exception.
+(Inherited from Exception )ﾉExpand table
+ﾉExpand table
+Methods
+Name Descr iption
+Equals(Object) Determines whether the specified object is equal to the current object.
+(Inherited from Object )
+GetBaseException() When overridden in a derived class, returns the Exception  that is the root
+cause of one or more subsequent exceptions.
+(Inherited from Exception )
+GetHash Code() Serves as the default hash function.
+(Inherited from Object )
+GetObject Data(Serialization Info,
+Streaming Context)Obsolet e.
+When overridden in a derived class, sets the SerializationInfo  with
+information about the exception.
+(Inherited from Exception )
+GetType() Gets the runtime type of the current instance.
+(Inherited from Exception )
+Memberwise Clone() Creates a shallow copy of the current Object .
+(Inherited from Object )
+ToString() Creates and returns a string representation of the current exception.
+(Inherited from Exception )
+Events
+Name Descr iption
+Serialize Object
+StateObsolet e.
+Occurs when an exception is serialized to create an exception state object that contains serialized
+data about the exception.
+(Inherited from Exception )
+Applies to
+Product Versions
+.NET Core 1.0, Core 1.1, Core 2.0, Core 2.1, Core 2.2, Core 3.0, Core 3.1, 5, 6, 7, 8, 9, 10
+.NET Framew ork 1.1, 2.0, 3.0, 3.5, 4.0, 4.5, 4.5.1, 4.5.2, 4.6, 4.6.1, 4.6.2, 4.7, 4.7.1, 4.7.2, 4.8, 4.8.1ﾉExpand table
+ﾉExpand table
+Product Versions
+.NET Standar d 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 2.0, 2.1
+UWP 10.0
+See also
+Exception
+Handling and throwing exceptions in .NET

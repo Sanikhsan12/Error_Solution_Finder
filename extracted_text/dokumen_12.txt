@@ -1,0 +1,462 @@
+Home >Mobile Applications >Solve Gradle & Flutter Build Errors: Java V ersion Fixes & Dependency Solutions
+Solve Gradle & Flutter Build Errors: Java V ersion Fixes & Dependency Solutions
+4 months ago  高效码农
+Diagnosing	and	Fixing	Gr adle	&	Flutt er	Build	Err ors	—	A
+Practical,	St ep-by-Step	Guide
+O v e rv i e w
+You provided a set of Gradle/Flutter build errors and traces. They repeatedly point to a small set of
+root causes that interact with each other:
+Gradle / plugin dependency resolution failures where certain artifacts (com.github.Ysj001.Byte
+codeUtil:plugin , com.github.Ysj001:DoKitPluginCompat ) could not be resolved because the
+artifact variants declare a Java	version not compatible with the build JVM. The logs show:
+c omponent	dec lar e s	a	c omponent	c ompatible	with	Ja v a	17	but	the	c onsumer	needed	Ja v a	11 .
+Flutter module include and local package resolution failures: include_flutter.groovy  missing,
+project(':flutter')  not found, and fiat_module  local path dependency missing in the Flutter
+module. Those block flutter pub get /AAR generation and therefore break  Android side
+inclusion.
+Kotlin / Java JVM target mismatch warnings and resulting Kotlin compilation failures inside the
+Flutter tool plugin source (FlutterPlugin.kt ) — unresolved references such as filePermissio
+ns, user , read , write . The errors show compileJava (11)  vs compileKotlin (1.8)
+inconsistency.
+Other incidental issues such as DataBinding BR imports failing and @Deprecated  annotation
+warnings.
+This guide walks through the logs, extracts the exact error messages, and shows the exact, practical
+steps and configuration snippets that will resolve the issues — in the order that matters. Follow the
+steps exactly and run the commands shown to verify each step before proceeding to the next.Search for
+Free Flutter Courses  Online 1. ❯
+Build Your Own App 2. ❯
+Top Stocks to Buy for Beginners 3. ❯
+AdLifestyle Insights
+This article is a direct, practical translation and rewrite of the build logs and interactions you
+provided. It keeps only the facts and steps that appear in the input, presented as a clear,
+actionable guide for engineers with a junior-college level of experience or above. Everything
+below is strictly derived from the original content you supplied; no outside material has been
+added.
+Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+Accept Deny View preferences
+Q u i ck 	 p r o b l e m 	 su m m a ry
+Your build fails because plugin artifacts and plugin code expect a newer Java/Kotlin toolchain (the
+artifacts are compiled for Java 17 and Kotlin expectations differ), while your Gradle or module
+settings still target older JVM compatibility (Java 11 or Kotlin jvmTarget 1.8); additionally, local Flutter
+module packaging and local path dependencies are missing, preventing generation of .android/incl
+ude_flutter.groovy  and causing project(':flutter')  not to be available.
+R a w	 e rr o r	 h i g h l i g h t s
+Use these exact lines when you verify outputs — they are the authoritative signals we respond to.
+No matching variant of com.github.Ysj001.BytecodeUtil:plugin:2.1.3 was found... Incomp
+atible because this component declares a component compatible with Java 17 and the cons
+umer needed a component compatible with Java 11
+No matching variant of com.github.Ysj001:DoKitPluginCompat:3.7.1-v1 was found... Incom
+patible because this component declares a component compatible with Java 17 and the con
+sumer needed a component compatible with Java 11
+Project with path ':flutter' could not be found in project ':flutter_modules'
+D:\coinbyte_flutter_entry\.android\include_flutter.groovy (D:\coinbyte_flutter_entry\.
+android\include_flutter.groovy)  — file not found reported by settings.gradle  line:85
+Because coinbyte_flutter_entry depends on fiat_module from path which doesn't exist (c
+ould not find package fiat_module at "..\fiat_module"), version solving failed.
+Inconsistent JVM-target compatibility detected for tasks 'compileJava' (11) and 'compi
+leKotlin' (1.8). This will become an error in Gradle 8.0.
+Unresolved reference: filePermissions
+Unresolved reference: user
+Unresolved reference: read
+Unresolved reference: write
+— all reported in: .../flutter/packages/flutter_tools/gradle/src/main/kotlin/FlutterPlugi
+n.kt:758..761
+Plugin [id: 'com.android.library'] was not found in any of the following sources  —
+reported from coinbyte_flutter_entry/.android/Flutter/build.gradle
+import jp.co.huobi.japan.BR;  — error: symbol not found (BR missing because DataBinding
+class not generated)
+M i n i m a l 	 e x p l a n a t i o n s	 u se d 	 t o 	 sh a p e 	 f i x e s
+(These points are strictly derived from the logs and prior suggestions included in your interaction;
+they are not extra facts.)
+If an artifact declares it was built for Java 17 but Gradle/consumer runs on Java 11, resolution
+will fail. The logs explicitly state this mismatch.
+If a Flutter module depends on a local path package (like fiat_module ) and that folder does not
+exist, flutter pub get  fails. Without a successful pub get  and flutter build , .android/inc
+lude_flutter.groovy  will not be produced; settings.gradle  that references that file will
+therefore fail.
+Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+Kotlin and Java compile targets must be consistent. The logs show compileJava  and compileKot
+lin  targets differ (11 vs 1.8), and the Kotlin compile step fails within Flutter plugin Kotlin
+sources because the JVM target is too low to expose certain APIs referenced there.
+W h a t 	 t o 	 d o ,	 i n 	 t h e 	 o r d e r	 y o u 	 sh o u l d 	 d o 	 i t
+Step	0	—	captur e	verification	outputs	(do	this	onc e,	copy	results	her e	if	you
+need	further	help)
+Run these in the project root and capture outputs:
+These two outputs show what Java and what JVM are currently being used. If ./gradlew -version
+shows a JVM that is not Java 17 and your plugin artifacts require Java 17, you need to make Gradle
+use Java 17.
+Step	1	—	Mak e	Gradle	use	Ja va	17	(root	cause	for	man y	dependency
+resolution	failur es)
+Why	first: The plugin artifact variants in your logs declare compatibility with Java 17; the consumer
+(your build) currently needs Java 11. Make the build use Java 17 so dependency resolution and
+Kotlin compile can proceed.
+What	to	do	(persistent	setting): Edit the project-level gradle.properties  file (create one at the
+root if it does not exist) and add:
+1# point to your local JDK 17 installation; replace with your actual path
+2org.gradle.java.home =C:/jdk17
+3org.gradle.jvmargs =-Xmx4096m -Dfile. encoding =UTF-8
+What	to	do	(temporary,	Windows	CMD):
+1set JAVA_HOME=C:\jdk17
+2set PATH=%JAVA_HOME% \bin;%PATH%
+3gradlew.bat clean build --refresh-dependencies
+Verify: ./gradlew -version  should show a JVM location that matches the JDK 17 path you set. If the
+artifact resolution error (No matching variant ... Java 17 ) disappears, step 1 succeeded.
+Step	2	—	Align	K otlin	jvmTarget 	and	Java	compile	tar get	(fix	c ompileJa va	vs
+compileK otlin	inc onsistency)
+Why: The logs show compileJava (11)  vs compileKotlin (1.8)  mismatch. This discrepancy
+causes Kotlin to target an older JVM where certain APIs (like file permission APIs referenced in FlutManage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+terPlugin.kt ) are not available, producing Unresolved reference  errors.
+What	to	add	(module-level	or	centralized	inside	subprojects{} ):
+Place this in your root build.gradle  inside a subprojects  block, or place equivalent lines in each
+module that compiles Kotlin:
+1subprojects  {
+2    afterEvaluate { project ->
+3        if (project.plugins.hasPlugin( 'kotlin' ) || project.plugins.hasPlugin( 'com.android.library' ) 
+|| project.plugins.hasPlugin( 'com.android.application' )) {
+4            // Kotlin toolchain to 17
+5            
+project.extensions.findByType(org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension)?.jvmToolcha
+{
+6                languageVersion. set(org.gradle.jvm.toolchain.JavaLanguageVersion.of( 17))
+7            }
+8            // Kotlin compile tasks set to jvmTarget 17
+9            project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+10                kotlinOptions.jvmTarget = "17"
+11            }
+12            // Java compile options align with Java 17
+13            project.extensions.findByName( "android" )?.with {
+14                compileOptions {
+15                    sourceCompatibility  JavaVersion.VERSION_17
+16                    targetCompatibility  JavaVersion.VERSION_17
+17                }
+18            }
+19        }
+20    }
+21}
+Or,	module-level	snippet	(one	module	build.gradle ):
+1android {
+2    compileSdk 33
+3    buildToolsVersion "33.0.3"
+4 
+5    compileOptions {
+6        sourceCompatibility  JavaVersion.VERSION_17
+7        targetCompatibility  JavaVersion.VERSION_17
+8    }
+9 
+10    kotlinOptions {
+11        jvmTarget = "17"
+12    }
+13}
+14 
+15kotlin {
+16    jvmToolchain {
+17        languageVersion. set(JavaLanguageVersion. of(17))
+18    }
+19}
+Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+Verify: Re-run ./gradlew clean build . The Inconsistent JVM-target  warning should no longer
+appear and the Kotlin compilation of Flutter plugin sources should proceed without Unresolved ref
+erence  for filePermissions , user , read , write .
+Step	3	—	Ensur e	the	 	 Andr oid	Gradle	Plugin	(A GP)	and	K otlin	Gradle
+plugin	ar e	available	in	r oot	build.gradle
+Why: The Plugin [id: 'com.android.library'] was not found  message indicates that the
+buildscript classpath did not include AGP. Add AGP and Kotlin plugin classpath entries at the root.
+Add	/	verify	in	build.gradle 	(root):
+1buildscript  {
+2    ext.kotlin_version = '1.8.20'
+3    repositories  {
+4        google()
+5        mavenCentral()
+6    }
+7    dependencies  {
+8        classpath  "com.android.tools.build:gradle:8.1.2"
+9        classpath  "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+10    }
+11}
+12 
+13allprojects  {
+14    repositories  {
+15        google()
+16        mavenCentral()
+17    }
+18}
+Notes	from	your	logs: You referenced ext.kotlin_version = '1.9.0'  and gradle 7.5  earlier.
+The practical set used in the logs and in the assistance was to use kotlin_version = '1.8.20'  with
+AGP 8.1.2  — that combination is the one included above in configuration examples from the
+conversation.
+Verify: Gradle sync should stop reporting com.android.library  missing.
+Step	4	—	Fix	Flutt er	module	local	dependency	err ors	and	gener ate
+.android/include_flutter.groovy
+Why: The include_flutter.groovy  file is missing and pub get  failed because fiat_module  path
+dependency does not exist. Without the generated include script, settings.gradle  cannot evaluate
+the Flutter module include.
+Action	plan	(exact	commands	and	checks):
+1. Open coinbyte_flutter_entry/pubspec.yaml  and find the fiat_module  entry:
+Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+1dependencies :
+2  fiat_module :
+3    path: ../fiat_module
+2. Ensure the folder ../fiat_module  exists relative to coinbyte_flutter_entry . Based on the
+logs, this path was missing and caused flutter pub get  to fail.
+3. If fiat_module  is missing, either:
+restore or copy fiat_module  into the expected relative path; or
+temporarily comment out the fiat_module  dependency in pubspec.yaml  (noting that code
+using it will then be broken until you restore it).
+4. Run (from coinbyte_flutter_entry ):
+1flutter pub get
+2flutter build aar    # or `flutter build apk` depending on your integration usage
+Outcome	expected	by	the	logs: After flutter build aar , .android/include_flutter.groovy  will
+exist at D:\coinbyte_flutter_entry\.android\include_flutter.groovy . That file is referenced by
+settings.gradle ; once it exists, the settings evaluation error disappears.
+Step	5	—	C orrect	settings.gradle 	include	paths	and	fix	typos
+Why: Your logs show path typos such as coinbyte_app-maste  missing an r. Even small path typos
+cause FileNotFoundException  for include files. Fix the paths and ensure references are relative to
+project root correctly.
+Example	fixes	(apply	exactly	in	settings.gradle ):
+If you want to apply the generated include script:
+apply from:'coinbyte_flutter_entry/.android/include_flutter.groovy'
+Or, if you prefer to include the Flutter module as a project directly:
+1include ':flutter'
+2project( ':flutter' ).projectDir = new File(rootDir, 'coinbyte_flutter_entry/.android/Flutter' )
+Verify: ./gradlew projects  or ./gradlew tasks  should no longer fail at settings evaluation. The
+error Project with path ':flutter' could not be found  should go away because :flutter  will
+be included.
+Step	6	—	R un	a	clean	build	and	w atch	for	the	first	r emaining	err or
+Commands	(from	project	root):
+1flutter clean
+2flutter pub get
+3./gradlew clean --no-daemon
+4./gradlew build --refresh-dependencies --no-daemon
+Why: This clears caches and forces dependency resolution again. If the earlier steps were applied
+correctly, the build should pass beyond the earlier dependency resolution and Kotlin compile errors.
+If any new or remaining error appears, capture it exactly and use it as the next diagnostic input.Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+C o d e 	 /	 c o n f i g	 sn i p p e t s	 y o u 	 c a n 	 c o p y 	 ( c o l l e ct e d 	 i n 	 o n e 	 p l a c e )
+gradle.properties
+1org.gradle.java.home =C:/jdk17
+2org.gradle.jvmargs =-Xmx4096m -Dfile. encoding =UTF-8
+3kotlin.code.style =official
+Root	build.gradle 	(top	fragment	to	include	AGP	and	Kotlin	plugin)
+1buildscript  {
+2    ext.kotlin_version = '1.8.20'
+3    repositories  {
+4        google()
+5        mavenCentral()
+6    }
+7    dependencies  {
+8        classpath  "com.android.tools.build:gradle:8.1.2"
+9        classpath  "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+10    }
+11}
+12 
+13allprojects  {
+14    repositories  {
+15        google()
+16        mavenCentral()
+17    }
+18}
+Module-level	JVM/Kotlin	alignment	(put	in	a	module	build.gradle 	or	centralize	in	root	subpr
+ojects	block)
+1android {
+2    compileSdk 33
+3    buildToolsVersion "33.0.3"
+4 
+5    compileOptions {
+6        sourceCompatibility  JavaVersion.VERSION_17
+7        targetCompatibility  JavaVersion.VERSION_17
+8    }
+9 
+10    kotlinOptions {
+11        jvmTarget = "17"
+12    }
+13}
+14 
+15kotlin {
+16    jvmToolchain {
+17        languageVersion. set(JavaLanguageVersion. of(17))
+18    }
+19}
+settings.gradle 	examples
+Use one of the two approaches:
+Include the generated include script (if it exists):
+apply from:'coinbyte_flutter_entry/.android/include_flutter.groovy'
+Or include Flutter project explicitly (adjust the path if your Flutter module generated a .android/
+Flutter  subproject):
+1include ':flutter'
+2project( ':flutter' ).projectDir = new File(rootDir, 'coinbyte_flutter_entry/.android/Flutter' )Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+C h e ck l i st 	 y o u 	 ca n 	 f o l l o w	 o n e - b y - o n e
+1. Confirm Java and Gradle JVM:
+java -version
+./gradlew -version
+2. If Gradle JVM is not JDK 17, set org.gradle.java.home  in gradle.properties  to your JDK 17
+path.
+3. Add AGP and Kotlin plugin classpath entries (root build.gradle ).
+4. Align Java and Kotlin targets (set sourceCompatibility , targetCompatibility , and kotlinOpti
+ons.jvmTarget  to 17; set kotlin.jvmToolchain  to Java 17).
+5. Fix missing local Flutter packages (fiat_module ) referenced in coinbyte_flutter_entry/pubspe
+c.yaml .
+6. Run flutter pub get  in coinbyte_flutter_entry .
+7. Run flutter build aar  (or flutter build apk ) to generate .android/include_flutter.groo
+vy.
+8. Correct settings.gradle  include paths to the generated include or include the :flutter
+project explicitly.
+9. Clean and rebuild:
+flutter clean
+flutter pub get
+./gradlew clean
+./gradlew build --refresh-dependencies
+10. If any error remains, copy the first  error message and bring it back — that will be the next root
+cause to handle.
+F A Q 	 ( q u e st i o n s	 y o u 	 a r e 	 l i k e l y 	 t o 	 a sk ,	 a n s w e r e d 	 d i r e ct l y )
+Q:	Why	does	Gradle	say	a	plugin	artifact	is	incompatible	with	my	build	JVM?
+A: The logs show the plugin artifacts declare compatibility with Java 17 while your build JVM was Java
+11. Gradle refuses to resolve variants that are declared for a different Java target. To resolve, make
+Gradle use JDK 17 or use plugin versions compiled for Java 11—your logs show the artifact variants
+are Java 17.
+Q:	include_flutter.groovy 	is	missing;	how	do	I	get	it?
+A: From your Flutter module folder (coinbyte_flutter_entry ), run flutter pub get  and then fl
+utter build aar  (or flutter build apk ) to generate the .android  directory and include_flutt
+er.groovy . If pub get  fails, fix local path dependencies first (your logs show fiat_module  path
+missing).
+Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+Q:	Why	am	I	seeing	Unresolved reference: filePermissions 	inside	FlutterPlugin.kt ?
+A: The Kotlin compile target was too low (jvmTarget 1.8) while compileJava targeted Java 11 or
+higher, causing inconsistent visibility for APIs used by the Flutter Gradle plugin Kotlin code. Align
+Kotlin jvmTarget and Java target (set both to 17 as shown) and the unresolved references go away.
+Q:	My	BR	import	can’t	resolve	(import jp.co.huobi.japan.BR; ).	What	does	that	mean?
+A: BR is the DataBinding generated class. If DataBinding is not enabled or layout files are not using
+<layout>  root tags, BR will not be generated. Ensure buildFeatures { dataBinding true }  and
+correct module namespace  if necessary.
+Q:	Can	I	avoid	installing	JDK	17	and	just	downgrade	the	plugins?
+A: Only if the plugin artifacts you use have versions compiled to be compatible with Java 11. Your logs
+indicate certain plugin versions are Java 17; if a Java-11-compatible release exists, you could switch
+to it. Otherwise, make Gradle run with Java 17.
+H o wT o 	 ( J S O N - L D 	 st ru ct u r e d 	 f o r	 L L M 	 a n d 	 d a t a 	 i n ge st i o n )
+1{
+2  "@context" : "https://schema.org" ,
+3  "@type": "HowTo",
+4  "name": "Fix Gradle + Flutter build errors related to Java/Kotlin target mismatch and  
+missing Flutter include" ,
+5  "description" : "Step-by-step actions to resolve plugin resolution failures due to Java  
+target mismatch, to generate Flutter include files, and to align Kotlin/Java compile  
+targets." ,
+6  "step": [
+7    {
+8      "@type": "HowToStep" ,
+9      "name": "Check Java and Gradle JVM" ,
+10      "text": "Run `java -version` and `./gradlew -version` to find the JVM used by Gradle."
+11    },
+12    {
+13      "@type": "HowToStep" ,
+14      "name": "Force Gradle to use JDK 17" ,
+15      "text": "Set `org.gradle.java.home` in `gradle.properties` to your JDK 17 path or  
+export `JAVA_HOME` to JDK 17 before running Gradle."
+16    },
+17    {
+18      "@type": "HowToStep" ,
+19      "name": "Align Kotlin and Java targets" ,
+20      "text": "Set `kotlinOptions.jvmTarget` and Java  
+`sourceCompatibility/targetCompatibility` to `17` and configure Kotlin jvmToolchain to Java  
+17."
+21    },
+22    {
+23      "@type": "HowToStep" ,
+24      "name": "Fix missing Flutter local package" ,
+25      "text": "Ensure local path dependency (e.g., `fiat_module`) exists so `flutter pub get`  
+succeeds and `.android/include_flutter.groovy` can be generated."
+26    },
+27    {
+28      "@type": "HowToStep" ,
+29      "name": "Generate Flutter include file and include it" ,
+30      "text": "Run `flutter build aar` to produce `.android/include_flutter.groovy`. In  
+`settings.gradle` apply from that file or include `:flutter` manually."
+31    }
+32  ]
+33}Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+F i n a l 	 v e ri f i ca t i o n 	 ch e ck l i st 	 ( o n e 	 m o r e 	 t i m e ,	 c o p y 	 & 	 p a st e 	 t o 	 ru n )
+Run these commands and confirm no errors remain:
+1# in project root
+2java -version
+3./gradlew - version
+4 
+5# ensure JDK17 is used
+6# either set JAVA_HOME/PATH or set org.gradle.java.home in gradle.properties
+7 
+8# from Flutter module
+9cd coinbyte_flutter_entry
+10flutter pub get
+11flutter build aar
+12 
+13# back to project root
+14flutter clean
+15flutter pub get
+16./gradlew clean
+17./gradlew build --refresh-dependencies
+If you still get any Unresolved reference  errors or the plugin variant error, copy the e x act error
+lines and return them — they are the precise signals we use to identify the next root cause.
+C l o si n g	 n o t e
+Everything in this post comes exactly from your provided build logs and the configuration snippets
+that appeared in the interactions. The instructions and configuration excerpts above are the practical
+actions and minimal changes that directly address each quoted error in your logs: Java version
+mismatches on dependency resolution, missing Flutter include files caused by local package absence,
+Kotlin and Java target inconsistencies, and the missing AGP classpath causing com.android.library
+plugin errors.
+If you need, paste the outputs of:
+1. java -version
+2. ./gradlew -version
+3. the top ~120 lines of your root build.gradle
+4. the gradle.properties  file
+— and I will produce the exact patch / diff to apply to those files so you can test with a single apply-
+and-build iteration.
+Tags: Android Development Flutter Gradle Java Kotlin
+Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.
+© 2026 Efficient Coder Liked ( 0)
+Related Posts
+ Mastering AI in 2026: 6 Skills to Outperform 90% of t … Automated AI Media Software: The Future of Conte …
+ AI Agent Evaluations: The Complete 2025-2026 Gui … VideoRAG: How Machines Finally Crack Extreme L …
+ Claude Code Setup Guide: Master Installation, Confi … LittleCrawler Python Framework: Master XHS, Xiany …
+ WeChat Chat History Unleashed: V iew, Export & Su … UniV ideo Explained: The Single Open-Source Mode …
+Manage Consent
+To provide the best experiences, we use technologies like cookies to store and/or access
+device information. Consenting to these technologies will allow us to process data such as
+browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may
+adversely af fect certain features and functions.

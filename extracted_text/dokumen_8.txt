@@ -1,0 +1,175 @@
+Page 1 of 6
+SQL - Injection
+What is SQL Injection?
+SQL Injection  is a w ay for hack ers to trick a website into giving them access to data they are not
+supposed to see. W ebsites use databases to store things lik e usernames, passwords, and other
+information.
+Normally , when y ou type into a form (lik e a login bo x), the website sends y our input to the
+database. If the website doesn't check y our input properly , a hack er can t ype in special commands
+instead of normal text, and the database will follow those commands.
+In simple words, SQL Injection happens when a website trusts user input too much and doesn't
+clean or check it before using it in the database.This is dangerous because it can let attack ers see priv ate data.
+It can allow them to log in without a password.
+They can change or delete information.
+In some cases, attack ers can ev en tak e control of the system.
+Advertisement Home  Whiteboard  Graphing Calculator  Online Compilers  Practice  Articles  T
+Chapters Categories
+Page 2 of 6
+How SQL Injection Works
+SQL Injection occurs when a website directly uses what a user t ypes into a form inside a database
+query , without checking it first. This means the database might accidentally treat the user's input
+as a command instead of just text.
+For example, imagine a login form where the website tak es the username and password and puts
+them str aight into a query . If a hack er types in special symbols or commands instead of normal
+text, the database can be trick ed into giving access without the real password. consider the
+following PHP code snippet that checks user login:
+<?php
+// Vulnerable code
+$username  = $_POST['username' ];
+$password  = $_POST['password' ];
+$query = "SELECT * FROM USERS WHERE USERNAME = ' $username ' AND PASSWORD = ' $password '";
+$result = mysqli_query ($conn, $query);
+?>
+If a malicious user enters ' OR '1'='1  as the password, the query becomes:
+SELECT * FROM USERS WHERE USERNAME = 'admin' AND PASSWORD = '' OR '1'='1';
+This condition is alw ays true because '1'='1'  evaluates to true, allowing the attack er to log in
+without knowing the actual password.
+Types of SQL Injection
+Following are different t ypes of SQL injection:
+Classic SQL Injection:  The hacker directly adds bad commands into a database query to
+make it do things it shouldn't.
+Union-Based SQL Injection:  The hacker uses the UNION  command to get information
+from other tables in the database.
+Error-Based SQL Injection:  The hacker looks at error messages from the database to
+learn secret information about it.
+Blind SQL Injection:  The hacker can't see error messages, so they guess information by
+watching how the website beha ves (lik e true/false responses, time dela ys, etc.).
+
+Page 3 of 6
+Example: Error -Based SQL Injection
+Let's sa y we ha ve a table called CUSTOMERS  that stores customer details lik e name, age,
+address, and salary . We can create it using this query:
+CREATE TABLE CUSTOMERS (
+   ID INT NOT NULL ,
+   NAME VARCHAR (20) NOT NULL ,
+   AGE INT NOT NULL ,
+   ADDRESS CHAR (25),
+   SALARY DECIMAL (18, 2),
+   PRIMARY KEY (ID)
+);
+Now, let us insert few records into this table using the INSER T statement as follows:
+INSERT INTO CUSTOMERS VALUES 
+(1, 'Ramesh' , 32, 'Ahmedabad' , 2000.00 ),
+(2, 'Khilan' , 25, 'Delhi', 1500.00 ),
+(3, 'Kaushik' , 23, 'Kota', 2000.00 ),
+(4, 'Chaitali' , 25, 'Mumbai' , 6500.00 ),
+(5, 'Hardik' , 27, 'Bhopal' , 8500.00 ),
+(6, 'Komal', 22, 'Hyderabad' , 4500.00 ),
+(7, 'Muffy', 24, 'Indore' , 10000.00  );
+The table will be created as follows:
+ID NAME AGE ADDRESS SALARY
+1 Ramesh 32 Ahmedabad 2000.00
+2 Khilan 25 Delhi 1500.00
+3 Kaushik 23 Kota 2000.00
+4 Chaitali 25 Mumbai 6500.00
+5 Hardik 27 Bhopal 8500.00
+6 Komal 22 Hyderabad 4500.00
+7 Muffy 24 Indore 10000.00
+Imagine a website uses this query to get a customer's name and salary b y ID:
+Page 4 of 6
+SELECT NAME, SALARY FROM CUSTOMERS WHERE ID = '1';
+If a hack er types 1 OR 1=1  instead of a normal ID , the query becomes:
+SELECT NAME, SALARY FROM CUSTOMERS WHERE ID = 1 OR 1=1;
+Because 1=1 is alw ays true, the database returns all rows  instead of just one record, exposing
+everyone's information:
+ID NAME AGE ADDRESS SALARY
+1 Ramesh 32 Ahmedabad 2000.00
+2 Khilan 25 Delhi 1500.00
+3 Kaushik 23 Kota 2000.00
+4 Chaitali 25 Mumbai 6500.00
+5 Hardik 27 Bhopal 8500.00
+6 Komal 22 Hyderabad 4500.00
+7 Muffy 24 Indore 10000.00
+How to Prevent SQL Injection
+Following are the best w ays to prev ent SQL Injection:
+Example of a Safe Query (Prepared Statement)Use Prepared Statements (Parameterized Queries):  Make sure user input is treated
+only as data, not as part of the database commands.
+Use Stored Procedures:  Keep SQL code inside the database instead of building queries
+with user input.
+Validate and Clean Input:  Always check and clean what users type before using it in
+queries.
+Give Minimum Permissions:  Give database accounts only the access they really need.
+Use ORM Libraries:  Tools lik e Hibernate or Entit y Framework handle SQL safely for y ou.
+Turn Off Detailed Error Messages:  Don't show database errors to users, so hackers
+can't learn about the database.
+Page 5 of 6
+TOP TUTORIALS
+Python T utorial
+Java Tutorial
+C++ T utorial
+C Progr amming T utorial
+C# Tutorial
+PHP T utorial
+R Tutorial
+HTML T utorial
+CSS Tutorial
+JavaScript T utorial
+SQL T utorialTRENDING TECHNOLOGIES
+Cloud Computing T utorial
+Amaz on Web Services T utorial
+Microsoft Azure T utorial
+Git Tutorial
+Ethical Hacking T utorial
+Docker Tutorial
+Kubernetes T utorial
+DSA Tutorial
+Spring Boot T utorial
+SDLC Tutorial
+Unix T utorial
+CERTIFICATIONS COMPILERS & EDITORSIn this example, the website uses a prepared statement . The question marks ? act as
+placeholders for user input. Then, the bind_param  function safely attaches the username and
+password to the query .
+This ensures that no matter what the user t ypes, it is treated only as data and cannot change
+the structure of the SQL query . As a result, SQL Injection attacks are prev ented, making the
+application much safer .
+<?php
+// Safe code using prepared statements
+$stmt = $conn->prepare("SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?" );
+$stmt->bind_param ("ss", $username , $password );
+$stmt->execute();
+$result = $stmt->get_result ();
+?>
+Here, user inputs are safely bound to the query , eliminating the risk of injection.
+Conclusion
+SQL Injection is a v ery common and serious securit y problem that can let attack ers access or
+change y our data. Dev elopers can protect their websites b y following simple safet y steps lik e using
+prepared statements, checking and cleaning user input, and giving database accounts only the
+access they need. By doing these things, applications become much safer from SQL Injection
+attacks.
+Page 6 of 6
+Business Analytics Certification
+Java & Spring Boot Adv anced Certification
+Data Science Adv anced Certification
+Cloud Computing And DevOps
+Advanced Certification In Business Analytics
+Artificial Intelligence And Machine Learning
+DevOps Certification
+Game Dev elopment Certification
+Front-End Dev eloper Certification
+AWS Certification T raining
+Python Progr amming CertificationOnline Ja va Compiler
+Online Python Compiler
+Online Go Compiler
+Online C Compiler
+Online C++ Compiler
+Online C# Compiler
+Online PHP Compiler
+Online MA TLAB Compiler
+Online Bash T erminal
+Online SQL Compiler
+Online Html Editor
+ABOUT US |OUR TEAM |CAREERS |JOBS|CONT ACT US |TERMS OF USE |
+PRIVACY POLICY |REFUND POLICY |COOKIES POLICY |FAQ'S
+Tutorials P oint is a leading Ed T ech compan y striving to pro vide the best learning material on
+technical and non-technical subjects.
+© Cop yright 2025. All Rights R eserv ed.

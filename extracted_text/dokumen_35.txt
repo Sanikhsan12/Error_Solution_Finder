@@ -1,0 +1,76 @@
+k otlin-st dlib / k otlin / Ar ithmeticEx ception
+Ar it hmetic Ex ception
+Since K ot lin
+1. 3
+Construct ors
+Ar ithmetic
+Ex ception
+Pr oper tiesCommon JS JVM Nativ e W asm- JS W asm- W ASI
+(source) expect open class ArithmeticException : RuntimeException
+Members Members & Ex t ensions
+Common JS Nativ e W asm- JS W asm- W ASI
+expect constructor()
+expect constructor(message: String?)K ot lin libr ar ies
+2 . 3
+Our website uses some cookies and records your IP address for the
+purposes of accessibility, security, and managing your access to the
+telecommunication network. You can disable data collection and cookies
+by changing your browser settings, but it may affect how this website
+functions. Learn more
+With your consent, JetBrains may also use cookies and your IP address
+to collect individual statistics and provide you with personalized
+offers and ads subject to the Privacy Notice and the Terms of Use.
+JetBrains may use third-party services for this purpose. You can adjust
+or withdraw your consent at any time by visiting the Opt-Out.
+Accept All Manage SettingsCookie Settings
+c ause
+Since K ot lin 1. 3
+message
+Since K ot lin 1. 3
+F unctions
+get St ack
+T race
+R etur ns an ar ra y of st ack trace str ings r epr esenting the st ack  
+trace per t aining t o this thr o wable.
+Since K ot lin 1. 3
+pr int St ack
+T race
+Pr int s the det ailed descr iption  of this thr o wable t o the st andar d  
+er r or output.
+Since K ot lin 1. 3
+t o Str ingCommon JS Nativ e W asm- JS W asm- W ASI
+expect open val cause: Throwable?
+Common JS Nativ e W asm- JS W asm- W ASI
+expect open val message: String?
+Nativ e
+@ExperimentalNativeApi
+fun getStackTrace(): Array<String>
+Nativ e
+fun printStackTrace()
+JS Nativ e W asm- JS W asm- W ASIOur website uses some cookies and records your IP address for the
+purposes of accessibility, security, and managing your access to the
+telecommunication network. You can disable data collection and cookies
+by changing your browser settings, but it may affect how this website
+functions. Learn more
+With your consent, JetBrains may also use cookies and your IP address
+to collect individual statistics and provide you with personalized
+offers and ads subject to the Privacy Notice and the Terms of Use.
+JetBrains may use third-party services for this purpose. You can adjust
+or withdraw your consent at any time by visiting the Opt-Out.Cookie Settings
+St a y in t ouch:
+K o t l i n ™  i s   p r o t e c t e d  u n d e r  t h e  K o t l i n   F o u n d a t i o n  a n d  l i c e n s e d  u n d e r  t h e  A p a c h e
+2   l i c e n s e .S u p p o r t e d  a n d  d e v e l o p e d
+b y   J e t B r a i n sR etur ns a str ing r epr esent ation of the object.
+Since K ot lin 1. 3open override fun toString(): String
+C o n t r i b u t i n g  t o  K o t l i n R e l e a s e s P r e s s  K i t S e c u r i t y B l o g
+I s s u e  T r a c k e r B r a n d  a s s e t s C a r e e r s K o t l i n  M e r c h O p t - O u t
+Our website uses some cookies and records your IP address for the
+purposes of accessibility, security, and managing your access to the
+telecommunication network. You can disable data collection and cookies
+by changing your browser settings, but it may affect how this website
+functions. Learn more
+With your consent, JetBrains may also use cookies and your IP address
+to collect individual statistics and provide you with personalized
+offers and ads subject to the Privacy Notice and the Terms of Use.
+JetBrains may use third-party services for this purpose. You can adjust
+or withdraw your consent at any time by visiting the Opt-Out.Cookie Settings

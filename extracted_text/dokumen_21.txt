@@ -1,0 +1,149 @@
+How to Fix: PermissionError: [Errno 13] Permission Denied in Python
+Last Updated : 23 Jul, 2025
+When your Python code encounters a situation where it lacks the necessary permissions to access a file or
+directory, it raises PermissionError: [Errno 13] Permission denied in Python. This article will explore how to
+address the Errno 13 Error in Python effectively.
+What is PermissionError: [Errno 13] Permission Denied in Python?
+PermissionError: [Errno 13] Permission Denied denotes a situation where a program attempts to execute an
+operation—such as file reading or writing—without the requisite permissions. This error typically arises when a
+user lacks the necessary privileges to access, modify, or execute a particular file or directory. The error
+message associated with Errno 13 explicitly indicates that permission is denied for the specified operation.
+Error Syntax
+PermissionError: [Errno 13] Permission denied
+below, are the reasons for the occurrence of PermissionError: [Errno 13] Permission denied in Python:
+Improper File Path Handling
+Incorrect File Content in Python
+Improper File Path Handling
+This Python code opens a file named "GFG.txt" for writing and writes "Hello, world!" into it. However, the file
+path contains backslashes (\), which might cause issues if not handled correctly.
+Output:
+Incorrect File Content with Python
+Below, code to overwrite the content of a file named "GFG.txt" located at a specific path. If executed without
+sufficient permissions, Python will raise a PermissionError (Error 13) indicating a permission denied error.with open(r"C:\Users\R.Daswanta kumar\OneDrive\Pictures\GFG\file\GFG.txt", "w") as file:
+    file.write("Hello, world!")
+file_path = r"C:\Users\R.Daswanta kumar\OneDrive\Pictures\GFG\file\GFG.txt"
+with open(file_path, "w") as file:
+    new_content = "New content to replace the existing content."
+    file.write(new_content)
+print("File content modified successfully!")Python Tutorial Data Types Interview Questions Examples Quizzes DSA Python Data Science NumPy Pandas Practice
+Output:
+Solution for PermissionError: [Errno 13] Permission Denied in Python
+Below, are the approaches to solve PermissionError: [Errno 13] Permission Denied in Python:
+Proper File Path Handling
+Correct File Content in Python
+Proper File Path Handling
+Below, code defines a file path and opens a file named "GFG.txt" in write mode, enabling it to overwrite
+existing content. It then replaces the content with the specified new text and confirms successful modification.
+Output
+File content modified successfully
+Correct File Content in Python
+The following code first checks if the file exists, then attempts to modify its permissions to allow writing. If
+successful, it proceeds to overwrite the file's content with new text. If the user lacks necessary permissions, it
+prints a message indicating permission denial. Finally, it confirms both the modification of file permissions and
+the content.
+Output
+File content modified successfullyfile_path = r"C:\Users\R.Daswanta kumar\OneDrive\Pictures\GFG\file\GFG.txt"
+with open(file_path, "w") as file:
+    new_content = "New content to replace the existing content."
+    file.write(new_content)
+print("File content modified successfully!")
+import os
+file_path = r"C:\Users\R.Daswanta kumar\OneDrive\Pictures\GFG\file\GFG.txt"
+try:
+    if os.path.exists(file_path):
+        os.chmod(file_path, 0o666)
+        print("File permissions modified successfully!")
+    else:
+        print("File not found:", file_path)
+except PermissionError:
+    print("Permission denied: You don't have the necessary permissions to change the permissions of this file.")
+with open(file_path, "w") as file:
+    new_content = "New content to replace the existing content."
+    file.write(new_content)
+print("File content modified successfully!")
+Comment daswa… Follow
+Article Tags: Python Python How-to-fix Python Errors
+Explore
+Python Fundamentals
+Python Data Structures
+Advanced Python
+Data Science with Python
+Web Development with Python
+Python PracticeConclusion
+In conclusion , To sum up, Error 13 is a frequent Python issue that arises from inadequate permissions when
+attempting to access certain files or folders. You may simply fix this problem and create reliable Python code
+by using the 'os' module, comprehending file permissions, and putting appropriate error handling in place.
+D
+ 10
+Corporate & Commun ications Address:
+A-143, 7th Floor, Sovereign Corporate
+Tower, Sector- 136, Noida, Uttar
+Pradesh (201305)
+Registered Address:
+K 061, Tower K, Gulshan Vivante
+Apartment, Sector 137, Noida, Gautam
+Buddh Nagar, Uttar Pradesh, 201305
+Company
+About Us
+Legal
+Privacy
+Policy
+Contact Us
+Advertise
+with us
+GFG
+Corporate
+Solution
+Campus
+Training
+ProgramExplore
+POTD
+Job-A-
+Thon
+Blogs
+Nation
+Skill UpTutorials
+Programming
+Languages
+DSA
+Web
+Technology
+AI, ML &
+Data Science
+DevOps
+CS Core
+Subjects
+Interview
+Preparation
+Software and
+ToolsCourses
+ML and Data
+Science
+DSA and
+Placements
+Web
+Development
+Programming
+Languages
+DevOps &
+Cloud
+GATE
+Trending
+TechnologiesVideos
+DSA
+Python
+Java
+C++
+Web
+Development
+Data Science
+CS SubjectsPreparation
+Corner
+Interview
+Corner
+Aptitude
+Puzzles
+GfG 160
+System Design
+@GeeksforGeeks, Sanchhaya Education Private Limited,All rights reserved
+

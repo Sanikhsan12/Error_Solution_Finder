@@ -1,0 +1,41 @@
+doc_id,title,url,filename
+1,The StackOverflowError in Java | Baeldung,https://www.baeldung.com/java-stack-overflow-error,dokumen_1.pdf
+2,Explanation of ClassCastException in Java | Baeldung,https://www.baeldung.com/java-classcastexception,dokumen_2.pdf
+3,Avoiding the ConcurrentModificationException in Java | Baeldung,https://www.baeldung.com/java-concurrentmodificationexception,dokumen_3.pdf
+4,Python - Exceptions Handling,https://www.tutorialspoint.com/python/python_exceptions.htm,dokumen_4.pdf
+5,Java - Exceptions,https://www.tutorialspoint.com/java/java_exceptions.htm,dokumen_5.pdf
+6,C++ Exception Handling,https://www.tutorialspoint.com/cplusplus/cpp_exceptions_handling.htm,dokumen_6.pdf
+7,JavaScript - Errors & Exceptions Handling,https://www.tutorialspoint.com/javascript/javascript_error_handling.htm,dokumen_7.pdf
+8,SQL - Injection,https://www.tutorialspoint.com/sql/sql-injection.htm,dokumen_8.pdf
+9,C++ Exception Handling (With Examples),https://www.programiz.com/cpp-programming/exception-handling,dokumen_9.pdf
+10,Java Exception Handling (With Examples),https://www.programiz.com/java-programming/exception-handling,dokumen_10.pdf
+11,android studio - Flutter Emulator Error Connecting to Service Protocol - Stack Overflow,https://stackoverflow.com/questions/56093247/flutter-emulator-error-connecting-to-service-protocol,dokumen_11.pdf
+12,Solve Gradle & Flutter Build Errors: Java Version Fixes & Dependency Solutions | Efficient Coder,https://www.xugj520.cn/en/archives/gradle-flutter-build-errors-java-fix.html,dokumen_12.pdf
+13,"Fix ""Unresolved Reference"" Error in Dart Project - Free Source Code and Learn Coding",https://aliendro.id/fix-unresolved-reference-error-in-dart-project/,dokumen_13.pdf
+14,How to solve “Unable to find git in your path” for flutter. | by Mutee Abdullah | Medium,https://medium.com/@mutee.abdullah.02/how-to-solve-unable-to-find-git-in-your-path-for-flutter-85926e971d00,dokumen_14.pdf
+15,"Resolving the ""CocoaPods Not Installed or Not in Valid State"" Error - Repeato",https://www.repeato.app/resolving-the-cocoapods-not-installed-or-not-in-valid-state-error/,dokumen_15.pdf
+16,Exception: Gradle task assembleDebug failed with exit code 1 (again) i – Omi AI,https://www.omi.me/blogs/flutter-errors/exception-gradle-task-assembledebug-failed-with-exit-code-1-again-in-flutter-causes-and-how-to-fix,dokumen_16.pdf
+17,FAILURE: Build failed with an exception. Exception: Gradle task assembleDebug failed with exit code 1 - Help/Discuss - Gradle Forums,https://discuss.gradle.org/t/failure-build-failed-with-an-exception-exception-gradle-task-assembledebug-failed-with-exit-code-1/44252,dokumen_17.pdf
+18,Int Object is Not Iterable – Python Error [Solved],https://www.freecodecamp.org/news/int-object-is-not-iterable-python-error-solved/,dokumen_18.pdf
+19,How to Fix TypeError: Int Object Is Not Iterable in Python | Rollbar,https://rollbar.com/blog/python-typeerror-int-object-not-iterable/,dokumen_19.pdf
+20,Python typeerror: ‘int’ object is not iterable Solution | Career Karma,https://careerkarma.com/blog/python-typeerror-int-object-is-not-iterable/,dokumen_20.pdf
+21,How to Fix: PermissionError: [Errno 13] Permission Denied in Python - GeeksforGeeks,https://www.geeksforgeeks.org/python/how-to-fix-permissionerror-errno-13-permission-denied-in-python/,dokumen_21.pdf
+22,PermissionError [Errno 13] Permission denied Python 2023 - Python Help - Discussions on Python.org,https://discuss.python.org/t/permissionerror-errno-13-permission-denied-python-2023/22360,dokumen_22.pdf
+23,"""PermissionError: [Errno 13] Permission denied""in windows - Python Help - Discussions on Python.org",https://discuss.python.org/t/permissionerror-errno-13-permission-denied-in-windows/56571,dokumen_23.pdf
+24,"Solution to: error: <class 'PermissionError'>, [Errno 13] Permission denied - Frappe Framework / App Development - Frappe Forum",https://discuss.frappe.io/t/solution-to-error-class-permissionerror-errno-13-permission-denied/100667,dokumen_24.pdf
+25,Error Dictionary changed size during iteration. - SABnzbd Forums,https://forums.sabnzbd.org/viewtopic.php?t=20432,dokumen_25.pdf
+26,"""Unindent does not match any outer indentation level"" | Codecademy",https://www.codecademy.com/forum_questions/53505b0c548c35f90d0000f9,dokumen_26.pdf
+27,Python error: unindent does not match any outer indentation level: Solution,https://careerkarma.com/blog/python-indentationerror/,dokumen_27.pdf
+28,Null Pointer Exception in Java - GeeksforGeeks,https://www.geeksforgeeks.org/java/null-pointer-exception-in-java/,dokumen_28.pdf
+29,NullPointerException Crash Your Java App? Here's How to Fix It,https://rollbar.com/blog/how-to-catch-and-fix-nullpointerexception-in-java/,dokumen_29.pdf
+30,ArrayIndexOutOfBoundsException  |  API reference  |  Android Developers,https://developer.android.com/reference/java/lang/ArrayIndexOutOfBoundsException,dokumen_30.pdf
+31,ArrayIndexOutOfBoundsException Class (Java.Lang) | Microsoft Learn,https://learn.microsoft.com/en-us/dotnet/api/java.lang.arrayindexoutofboundsexception?view=net-android-35.0,dokumen_31.pdf
+32,Array Index Out Of Bounds Exception in Java - GeeksforGeeks,https://www.geeksforgeeks.org/java/array-index-out-of-bounds-exception-in-java/,dokumen_32.pdf
+33,ArithmeticException Class (System) | Microsoft Learn,https://learn.microsoft.com/en-us/dotnet/api/system.arithmeticexception?view=net-10.0,dokumen_33.pdf
+34,How to Handle a java.lang.ArithmeticException in Java? - GeeksforGeeks,https://www.geeksforgeeks.org/java/how-to-handle-a-java-lang-arithmeticexception-in-java/,dokumen_34.pdf
+35,ArithmeticException | Core API – Kotlin Programming Language,https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-arithmetic-exception/,dokumen_35.pdf
+36,ReferenceError - JavaScript | MDN,https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError,dokumen_36.pdf
+37,How to Fix ReferenceError: $ is Not Defined in JavaScript | Rollbar,https://rollbar.com/blog/fix-reference-error-is-not-defined-in-javascript/,dokumen_37.pdf
+38,TypeError - JavaScript | MDN,https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError,dokumen_38.pdf
+39,Python Exception Handling - GeeksforGeeks,https://www.geeksforgeeks.org/python-exception-handling/,dokumen_39.pdf
+40,JavaScript Errors Throw and Try to Catch - GeeksforGeeks,https://www.geeksforgeeks.org/javascript-errors-throw-and-try-to-catch/,dokumen_40.pdf

@@ -1,0 +1,76 @@
+WebJavaScriptReferenceStandard built-in objectsReferenceError
+ReferenceError
+The ReferenceError object represents an error when a variable that doesn't exist (or hasn't yet been initialized) in the current scope
+is referenced.
+ReferenceError is a serializable object, so it can be cloned with structuredClone() or copied between Workers using
+postMessage().
+ReferenceError is a subclass of Error.
+Constructor
+ReferenceError()
+Creates a new ReferenceError object.
+Instance properties
+Also inherits instance properties from its parent Error.
+These properties are defined on ReferenceError.prototype and shared by all ReferenceError instances.
+ReferenceError.prototype.constructor
+The constructor function that created the instance object. For ReferenceError instances, the initial value is the ReferenceError
+constructor.
+ReferenceError.prototype.name
+Represents the name for the type of error. For ReferenceError.prototype.name, the initial value is "ReferenceError".
+Instance methods
+Inherits instance methods from its parent Error.
+Examples
+Catching a ReferenceError
+JS
+English (US)
+Baseline Widely available *
+
+try{
+let a = undefinedVariable;
+}catch(e){
+console.log(e instanceofReferenceError);// true
+console.log(e.message);// "undefinedVariable is not defined"
+console.log(e.name);// "ReferenceError"
+console.log(e.stack);// Stack of the error
+}
+Creating a ReferenceError
+JS
+try{
+thrownewReferenceError("Hello");
+}catch(e){
+console.log(e instanceofReferenceError);// true
+console.log(e.message);// "Hello"
+console.log(e.name);// "ReferenceError"
+console.log(e.stack);// Stack of the error
+}
+Specifications
+Specification
+ECMAScript® 2026 Language Specification
+# sec-native-error-types-used-in-this-standard-referenceerror
+Browser compatibility
+Report problems with this compatibility data • View data on GitHub
+ReferenceError
+1121 5 118410.11 14.41 1 10.10
+ReferenceError()
+constructor 1121 5 118410.11 14.41 1 10.10
+Chrome
+Edge
+Firefox
+Opera
+Safari
+Chrome Android
+Firefox for Android
+Opera Android
+Safari on iOS
+Samsung Internet
+WebView Android
+WebView on iOS
+Bun
+Deno
+Node.js
+
+Full supportNo supportSee implementation notes.
+See also
+Error
+Your blueprint for a better internet.ReferenceError is
+serializable777910364No7710355No1277NoNoNoNo
+

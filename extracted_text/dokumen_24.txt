@@ -1,0 +1,80 @@
+Frappe.ioFrappe CloudDocumentationPartnersFrappe SchoolMarketplacePublic
+Chat
+installation_problem,supervisord
+CATEGORIES
+TAGSTopics
+More
+Frappe Boo…
+Frappe Hel…
+Insights
+ERPNext
+Frappe Buil…
+Frappe Cloud
+Frappe Fra…
+Frappe HR
+Healthcare
+Gameplan
+All categori…
+erpnext
+customizat…
+frappe
+bug
+installation…
+All tagspitalms Feb 2023
+Iʼm working on erpnext v14 - productions, everything is supposed to be set up
+correctly…
+However, I have the same problem that keeps appearing, when I execute bench
+commands… such as: “update, migrate, …”
+This error appears as follows:
+error: <class ‘PermissionErrorʼ>, [Errno 13] Permission denied: file:
+/usr/lib/python3/dist-packages/supervisor/xmlrpc.py line: 560
+Is there anyone here who can help me?
+What am I missing here? Please Help…
+Solved by MohamedAbdulsalamin post 6
+error: <class ‘PermissionErrorʼ>, [Errno 13] Permission denied: file:
+/usr/lib/python3/dist-packages/supervisor/xmlrpc.py line: 560 This error occurs
+when you try to access a file that you donʼt have permissions to access in Python,
+The solution is to grant yourself (User) access to the file usi…
+HUMENTHContributor Feb 2023
+You can follow Step 19 from this tutorial “How to install ERPNext”.
+smartp Feb 2023
+Greetings Sir, please can you help with this error message when trying to run
+erpnext 14
+Traceback (most recent call last):
+File “/usr/local/bin/bench”, line 8, in
+sys.exit(cli())
+File “/usr/local/lib/python3.8/dist-packages/bench/cli.py”, line 71, in cli
+cmd_from_sys = get_cmd_from_sysargv()
+File “/usr/local/lib/python3.8/dist-packages/bench/utils/init.py”, line 55 4, in
+get_cmd_from_sysargv
+if sys_argv.index(arg) == 0 and arg in Bench(“.”).apps:
+File “/usr/local/lib/python3.8/dist-packages/bench/bench.py”, line 67, in in it
+self.apps = BenchApps(self)
+File “/usr/local/lib/python3.8/dist-packages/bench/bench.py”, line 174, in i nit
+self.initialize_apps()
+File “/usr/local/lib/python3.8/dist-packages/bench/bench.py”, line 278, in ini
+tialize_appsSolution to: error: <class ‘PermissionError’>,
+[Errno 13] Permission denied
+Skip to main content
+for x in os.listdir(os.path.join(self.bench.name, “apps”))
+PermissionError: [Errno 13] Permission denied: ‘./appsʼ
+i was following Synbricks Tutorials @
+ERPNext Install Ubuntu 20.04 - Manual Step by Step
+» SYNCBRICKS - Information...
+Complete guide for EPRNext Install on Ubuntu 20.04 Step
+by Step installation of Server, Bench, Frappe, ERPNext, SSL and Production.
+Skip to main content
+Powered by Discourse
+FrappeNew & Unread Topics
+Topic RepliesViewsActivity
+frappe.exceptions.SessionBootFailed 0 29Oct 2025
+URY-POS Need some modifications 3 75Oct 2025
+How to Create Custom Dynamic Sprint Burn
+Down & Burn Up Charts in Frappe Insights?
+erpnext,bug,custom_script1 51Sep 2025
+Your Experience Using AI to Develop Frappe
+Apps0109Jul 2025
+Create new doctype on reciving communication
+on same thread
+erpnext,frappe,custom_script0 22Oct 2025
+Want to read more? Browse other topics in  or view latest topics.

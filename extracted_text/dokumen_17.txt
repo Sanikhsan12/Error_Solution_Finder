@@ -1,0 +1,44 @@
+ImNyK7Naufal Yuwan Nov 2022
+Hey guys i have an error with my program and it shows to ask for help in here, here’s my error
+i tried pub clean, get and upgrade but still nothing
+here’s my flutter doctor result
+any help would mean so much to me.FAILURE: Build failed with an exception.
+* Where:
+Script 'D:\Software\Flutter\flutter\packages\flutter_tools\gradle\flutter.gradle' line: 1159
+* What went wrong:
+Execution failed for task ':app:compileFlutterBuildDebug'.
+> Process 'command 'D:\Software\Flutter\flutter\bin\flutter.bat'' finished with non-zero exit val
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+* Get more help at https://help.gradle.org
+BUILD FAILED in 54s
+Running Gradle task 'assembleDebug'...                             55.9s
+Exception: Gradle task assembleDebug failed with exit code 1
+Doctor summary (to see all details, run flutter doctor -v):
+[√] Flutter (Channel stable, 3.3.3, on Microsoft Windows [Version 10.0.19044.2251], locale en-GB)
+[√] Android toolchain - develop for Android devices (Android SDK version 33.0.0)
+[√] Chrome - develop for the web
+[X] Visual Studio - develop for Windows
+    X Visual Studio not installed; this is necessary for Windows development.
+      Download at https://visualstudio.microsoft.com/downloads/.
+      Please install the "Desktop development with C++" workload, including all of its default co
+[√] Android Studio (version 2021.3)
+[√] Connected device (4 available)
+[√] HTTP Host Availability
+! Doctor found issues in 1 category.
+VampireBjörn KautlerLeader Nov 2022
+This unfortunate hint to ask here is unfortunately shown on any failed Gradle build, even if it is not at all
+a Gradle problem. In your case what you showed says that the task :app:compileFlutterBuildDebug  is
+failing, so you probably have some problem in some code you try to compile and not a Gradle problem.
+Just scroll up and you probably see the actual error.FAILURE: Build failed with an exception. Exception: Gradle
+task assembleDebug failed with exit code 1
+Skip to last reply Skip to top Skip to main content
+Related topics
+Topic RepliesViews Activity
+Failure running :app:compileFlutterBuildDebug 1 1.3k Jun 2023
+FAILURE: Build failed with an exception. Running Gradle task ‘assembleDebug’ 0 592 Aug 2021
+Execution failed for task ‘:app:compileFlutterBuildDebug’ 2 5.6k Jun 2023
+How do i solve this? 1 2.8k Oct 2023
+Please help me? 1 360 Mar 2020

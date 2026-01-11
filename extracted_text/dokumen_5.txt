@@ -1,0 +1,472 @@
+Page 1 of 16
+Java - Exceptions
+What Is an Exception in Java?
+An ex ception (or ex ceptional ev ent) is a problem that arises during the ex ecution of a progr am.
+When an Exception  occurs the normal flow of the progr am is disrupted and the
+progr am/Application terminates abnormally , which is not recommended, therefore, these
+exceptions are to be handled.
+Why Exception Occurs?
+An ex ception can occur for man y different reasons. F ollowing are some scenarios where an
+exception occurs.Advertisement
+A user has entered an in valid data.
+A file that needs to be opened cannot be found.
+ Home  Whiteboard  Graphing Calculator  Online Compilers  Practice  Articles  T
+Chapters Categories
+Page 2 of 16
+Some of these ex ceptions are caused b y user error , others b y progr ammer error , and others b y
+physical resources that ha ve failed in some manner .
+Java Exception Categories
+Based on these, we ha ve the following categories of Ex ceptions. Y ou need to understand them to
+know how ex ception handling works in Ja va.
+Java Check ed Ex ceptions
+A check ed ex ception is an ex ception that is check ed (notified) b y the compiler at compilation-time,
+these are also called as compile time ex ceptions. These ex ceptions cannot simply be ignored, the
+progr ammer should tak e care of (handle) these ex ceptions.
+Example: Check ed Ex ceptions in Ja va
+For example, if y ou use FileReader  class in y our progr am to read data from a file, if the file
+specified in its constructor doesn't exist, then a FileNotF oundEx ception  occurs, and the compiler
+prompts the progr ammer to handle the ex ception.
+import java.io.File;
+import java.io.FileReader ;
+public class FilenotFound_Demo  {
+   public static void main(String args[]) {
+      File file = new File("E://file.txt" );
+      FileReader  fr = new FileReader (file); 
+   }
+}
+If you try to compile the abo ve progr am, y ou will get the following ex ceptions.A network connection has been lost in the middle of communicati ons or the JVM has run
+out of memory .
+Check ed ex ceptions
+Uncheck ed ex ceptions
+Errors
+Page 3 of 16
+Output
+C:\>javac FilenotFound_Demo.java
+FilenotFound_Demo.java:8: error: unreported exception FileNotFoundException; must be caugh
+      FileReader fr = new FileReader(file);
+                      ^
+1 error
+Note  − Since the methods read()  and close()  of FileR eader class throws IOEx ception, y ou can
+observ e that the compiler notifies to handle IOEx ception, along with FileNotF oundEx ception.
+Java Uncheck ed Ex ceptions
+An uncheck ed ex ception is an ex ception that occurs at the time of ex ecution. These are also called
+as Runtime Ex ceptions. These include progr amming bugs, such as logic errors or improper use of
+an API. R untime ex ceptions are ignored at the time of compilation.
+Example: Uncheck ed Ex ceptions in Ja va
+For example, if y ou ha ve declared an arr ay of siz e 5 in y our progr am, and trying to call the 6
+element of the arr ay then an ArrayIndexOutOfBoundsEx ceptionex ception  occurs.
+public class Unchecked_Demo  {
+   
+   public static void main(String args[]) {
+      int num[] = {1, 2, 3, 4};
+      System.out.println(num[5]);
+   }
+}
+If you compile and ex ecute the abo ve progr am, y ou will get the following ex ception.
+Output
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 5
+at Exceptions.Unchecked_Demo.main(Unchecked_Demo.java:8)
+Java Errorsth
+Page 4 of 16
+These are not ex ceptions at all, but problems that arise bey ond the control of the user or the
+progr ammer . Errors are t ypically ignored in y our code because y ou can r arely do an ything about an
+error. For example, if a stack o verflow occurs, an error will arise. They are also ignored at the time
+of compilation.
+Java Exception Hierarchy
+All ex ception classes are subt ypes of the ja va.lang.Ex ception class. The ex ception class is a
+subclass of the Throw able class . Other than the ex ception class there is another subclass called
+Error which is deriv ed from the Throw able class.
+Errors are abnormal conditions that happen in case of sev ere failures, these are not handled b y the
+Java progr ams. Errors are gener ated to indicate errors gener ated b y the runtime en vironment.
+Example: JVM is out of memory . Normally , progr ams cannot reco ver from errors.
+The Ex ception class has two main subclasses: IOEx ception class and R untimeEx ception Class.
+Following is a list of most common check ed and uncheck ed Java's Built -in Ex ceptions .
+Java Exception Class Methods
+Following is the list of important methods a vailable in the Throw able class.
+Sr.No. Method & Description
+1public String getMessage()
+Returns a detailed message about the ex ception that has occurred. This message is
+initializ ed in the Throw able constructor .
+2public Throwable getCause()
+Returns the cause of the ex ception as represented b y a Throw able object.
+3 public String toString()
+Page 5 of 16
+Returns the name of the class concatenated with the result of getMessage().
+4public void printStackTrace()
+Prints the result of toString() along with the stack tr ace to S ystem.err , the error output
+stream.
+5public StackTraceElement [] getStackTrace()
+Returns an arr ay containing each element on the stack tr ace. The element at index 0
+represents the top of the call stack, and the last element in the arr ay represents the
+method at the bottom of the call stack.
+6public Throwable fillInStackTrace()
+Fills the stack tr ace of this Throw able object with the current stack tr ace, adding to an y
+previous information in the stack tr ace.
+Catching Exceptions: Exception Handling in Java
+A method catches an ex ception using a combination of the try and catch  keywords. A try/catch
+block is placed around the code that might gener ate an ex ception. Code within a try/catch block is
+referred to as protected code, and the syntax for using try/catch looks lik e the following −
+Syntax
+try {
+   // Protected code
+} catch (ExceptionName  e1) {
+   // Catch block
+}
+The code which is prone to ex ceptions is placed in the try block. When an ex ception occurs, that
+exception occurred is handled b y catch block associated with it. Ev ery try block should be
+immediately followed either b y a catch block or finally block.
+A catch statement in volves declaring the t ype of ex ception y ou are trying to catch. If an ex ception
+occurs in protected code, the catch block (or blocks) that follows the try is check ed. If the t ype of
+exception that occurred is listed in a catch block, the ex ception is passed to the catch block much
+as an argument is passed into a method par ameter .
+Example: Demonstr ating Ex ception Handling
+In following example, an arr ay is declared with 2 elements. Then the code tries to access the 3
+element of the arr ay which throws an ex ception.rd
+Page 6 of 16
+// File Name : ExcepTest.java
+import java.io.*;
+public class ExcepTest  {
+   public static void main(String args[]) {
+      try {
+         int a[] = new int[2];
+         System.out.println("Access element three :"  + a[3]);
+      } catch (ArrayIndexOutOfBoundsException  e) {
+         System.out.println("Exception thrown  :"  + e);
+      }
+      System.out.println("Out of the block" );
+   }
+}
+Output
+Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: 3
+Out of the block
+Multiple Catch Blocks
+A try block can be followed b y multiple catch blocks. The syntax for multiple catch blocks looks lik e
+the following −
+Syntax
+try {
+   // Protected code
+} catch (ExceptionType1  e1) {
+   // Catch block
+} catch (ExceptionType2  e2) {
+   // Catch block
+} catch (ExceptionType3  e3) {
+   // Catch block
+}
+The previous statements demonstr ate three catch blocks, but y ou can ha ve any number of them
+after a single try . If an ex ception occurs in the protected code, the ex ception is thrown to the first
+catch block in the list. If the data t ype of the ex ception thrown matches Ex ceptionT ype1, it gets
+Page 7 of 16
+caught there. If not, the ex ception passes down to the second catch statement. This continues
+until the ex ception either is caught or falls through all catches, in which case the current method
+stops ex ecution and the ex ception is thrown down to the previous method on the call stack.
+Example
+Here is code segment showing how to use multiple try/catch statements.
+try {
+   file = new FileInputStream (fileName );
+   x = (byte) file.read();
+} catch (IOException  i) {
+   i.printStackTrace ();
+   return -1;
+} catch (FileNotFoundException  f) // Not valid! {
+   f.printStackTrace ();
+   return -1;
+}
+Catching Multiple Type of Exceptions
+Since Ja va 7, y ou can handle more than one ex ception using a single catch block, this feature
+simplifies the code. Here is how y ou would do it −
+catch (IOException|FileNotFoundException ex) {
+   logger.log(ex);
+   throw ex;
+The Throws/Throw Keywords
+If a method does not handle a check ed ex ception, the method must declare it using the throws
+keyword. The throws k eyword appears at the end of a method's signature.
+You can throw an ex ception, either a newly instantiated one or an ex ception that y ou just caught,
+by using the throw  keyword.
+Try to understand the difference between throws and throw k eywords, throws  is used to postpone
+the handling of a check ed ex ception and throw  is used to in voke an ex ception explicitly .
+The following method declares that it throws a R emoteEx ception −
+Example
+Page 8 of 16
+import java.io.*;
+public class className {
+   public void deposit(double amount) throws RemoteException  {
+      // Method implementation
+      throw new RemoteException ();
+   }
+   // Remainder of class definition
+}
+A method can declare that it throws more than one ex ception, in which case the ex ceptions are
+declared in a list separ ated b y commas. F or example, the following method declares that it throws
+a RemoteEx ception and an InsufficientFundsEx ception −
+Example
+import java.io.*;
+public class className {
+   public void withdraw (double amount) throws RemoteException , 
+      InsufficientFundsException  {
+      // Method implementation
+   }
+   // Remainder of class definition
+}
+The Finally Block
+The finally block follows a try block or a catch block. A finally block of code alw ays ex ecutes,
+irrespectiv e of occurrence of an Ex ception.
+Using a finally block allows y ou to run an y cleanup-t ype statements that y ou want to ex ecute, no
+matter what happens in the protected code.
+A finally block appears at the end of the catch blocks and has the following syntax −
+Syntax
+try {
+   // Protected code
+} catch (ExceptionType1  e1) {
+   // Catch block
+Page 9 of 16
+} catch (ExceptionType2  e2) {
+   // Catch block
+} catch (ExceptionType3  e3) {
+   // Catch block
+}finally {
+   // The finally block always executes.
+}
+Example
+public class ExcepTest  {
+   public static void main(String args[]) {
+      int a[] = new int[2];
+      try {
+         System.out.println("Access element three :"  + a[3]);
+      } catch (ArrayIndexOutOfBoundsException  e) {
+         System.out.println("Exception thrown  :"  + e);
+      }finally {
+         a[0] = 6;
+         System.out.println("First element value: "  + a[0]);
+         System.out.println("The finally statement is executed" );
+      }
+   }
+}
+Output
+Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: 3
+First element value: 6
+The finally statement is executed
+Note the following −
+Page 10 of 16
+The try-with-resources
+Gener ally, when we use an y resources lik e streams, connections, etc. we ha ve to close them
+explicitly using finally block. In the following progr am, we are reading data from a file using
+FileReader  and we are closing it using finally block.
+Example
+import java.io.File;
+import java.io.FileReader ;
+import java.io.IOException ;
+public class ReadData_Demo  {
+   public static void main(String args[]) {
+      FileReader  fr = null;
+      try {
+         File file = new File("file.txt" );
+         fr = new FileReader (file); char [] a = new char[50];
+         fr.read(a);   // reads the content to the array
+         for(char c : a)
+         System.out.print(c);   // prints the characters one by one
+      } catch (IOException  e) {
+         e.printStackTrace ();
+      }finally {
+         try {
+            fr.close();
+         } catch (IOException  ex) {
+            ex.printStackTrace ();
+         }
+      }
+   }
+}
+try-with-resources , also referred as automatic resource management , is a new ex ception
+handling mechanism that w as introduced in Ja va 7, which automatically closes the resources usedA catch clause cannot exist without a try statement.
+It is not compulsory to ha ve finally clauses whenev er a try/catch block is present.
+The try block cannot be present without either catch clause or finally clause.
+Any code cannot be present in between the try , catch, finally blocks.
+Page 11 of 16
+within the try catch block.
+To use this statement, y ou simply need to declare the required resources within the parenthesis,
+and the created resource will be closed automatically at the end of the block. F ollowing is the
+syntax of try -with-resources statement.
+Syntax
+try(FileReader  fr = new FileReader ("file path" )) {
+   // use the resource
+   } catch () {
+      // body of catch 
+   }
+}
+Following is the progr am that reads the data in a file using try -with-resources statement.
+Example
+import java.io.FileReader ;
+import java.io.IOException ;
+public class Try_withDemo  {
+   public static void main(String args[]) {
+      try(FileReader  fr = new FileReader ("E://file.txt" )) {
+         char [] a = new char[50];
+         fr.read(a);   // reads the contentto the array
+         for(char c : a)
+         System.out.print(c);   // prints the characters one by one
+      } catch (IOException  e) {
+         e.printStackTrace ();
+      }
+   }
+}
+Following points are to be k ept in mind while working with try -with-resources statement.
+To use a class with try-with-res ources statement it should implement AutoCloseable
+interface and the close()  method of it gets in voked automatically at runtime.
+You can declare more than one class in try -with-resources statement.
+Page 12 of 16
+User-deﬁned Exceptions in Java
+You can create y our own ex ceptions in Ja va. Keep the following points in mind when writing y our
+own ex ception classes −
+Syntax
+We can define our own Ex ception class as below −
+class MyException  extends Exception  {
+}
+You just need to extend the predefined Exception  class to create y our own Ex ception. These are
+considered to be check ed ex ceptions. The following InsufficientFundsException  class is a user -
+defined ex ception that extends the Ex ception class, making it a check ed ex ception. An ex ception
+class is lik e any other class, containing useful fields and methods.
+Example: Creating user -defined ex ception
+// File Name InsufficientFundsException.java
+import java.io.*;
+public class InsufficientFundsException  extends Exception  {
+   private double amount;
+   
+   public InsufficientFundsException (double amount) {
+      this.amount = amount;
+   }
+   While you declare multiple classes in the try block of try-with-res ources statement these
+classes are closed in rev erse order .
+Except the declar ation of resources within the parenthesis everything is the same as
+normal try/catch block of a try block.
+The resource declared in try gets instantiated just before the start of the try -block.
+The resource declared at the try block is implicitly declared as final.
+All ex ceptions must be a child of Throw able.
+If you want to write a check ed exception that is automatically enforced by the Handle or
+Declare R ule, y ou need to extend the Ex ception class.
+If you want to write a runtime ex ception, y ou need to extend the R untimeEx ception class.
+Page 13 of 16
+   public double getAmount () {
+      return amount;
+   }
+}
+To demonstr ate using our user -defined ex ception, the following CheckingAccount class contains a
+withdr aw() method that throws an InsufficientFundsEx ception.
+// File Name CheckingAccount.java
+import java.io.*;
+public class CheckingAccount  {
+   private double balance ;
+   private int number;
+   
+   public CheckingAccount (int number) {
+      this.number = number;
+   }
+   
+   public void deposit(double amount) {
+      balance += amount;
+   }
+   
+   public void withdraw (double amount) throws InsufficientFundsException  {
+      if(amount <= balance ) {
+         balance -= amount;
+      }else {
+         double needs = amount - balance ;
+         throw new InsufficientFundsException (needs);
+      }
+   }
+   
+   public double getBalance () {
+      return balance ;
+   }
+   
+   public int getNumber () {
+      return number;
+   }
+}
+The following BankDemo progr am demonstr ates in voking the deposit() and withdr aw() methods of
+CheckingAccount.
+Page 14 of 16
+// File Name BankDemo.java
+public class BankDemo  {
+   public static void main(String [] args) {
+      CheckingAccount  c = new CheckingAccount (101);
+      System.out.println("Depositing $500..." );
+      c.deposit(500.00);
+      
+      try {
+         System.out.println("\nWithdrawing $100..." );
+         c.withdraw (100.00);
+         System.out.println("\nWithdrawing $600..." );
+         c.withdraw (600.00);
+      } catch (InsufficientFundsException  e) {
+         System.out.println("Sorry, but you are short $"  + e.getAmount ());
+         e.printStackTrace ();
+      }
+   }
+}
+Compile all the abo ve three files and run BankDemo . This will produce the following result −
+Output
+Depositing $500...
+Withdrawing $100...
+Withdrawing $600...
+Sorry, but you are short $200.0
+InsufficientFundsException
+         at CheckingAccount.withdraw(CheckingAccount.java:25)
+         at BankDemo.main(BankDemo.java:13)
+Common Java Exceptions
+In Java, it is possible to define two catergories of Ex ceptions and Errors.
+JVM Exceptions  − These are exceptions/errors that are exclusiv ely or logically thrown by
+the JVM. Examples: NullPointerEx ception, ArrayIndexOutOfBoundsEx ception,
+ClassCastEx ception.
+Page 15 of 16
+TOP TUTORIALS
+Python T utorial
+Java Tutorial
+C++ T utorial
+C Progr amming T utorial
+C# Tutorial
+PHP T utorial
+R Tutorial
+HTML T utorial
+CSS Tutorial
+JavaScript T utorial
+SQL T utorialTRENDING TECHNOLOGIES
+Cloud Computing T utorial
+Amaz on Web Services T utorial
+Microsoft Azure T utorial
+Git Tutorial
+Ethical Hacking T utorial
+Docker Tutorial
+Kubernetes T utorial
+DSA Tutorial
+Spring Boot T utorial
+SDLC Tutorial
+Unix T utorial
+CERTIFICATIONS
+Business Analytics Certification
+Java & Spring Boot Adv anced Certification
+Data Science Adv anced Certification
+Cloud Computing And DevOps
+Advanced Certification In Business Analytics
+Artificial Intelligence And Machine Learning
+DevOps Certification
+Game Dev elopment Certification
+Front-End Dev eloper Certification
+AWS Certification T raining
+Python Progr amming CertificationCOMPILERS & EDITORS
+Online Ja va Compiler
+Online Python Compiler
+Online Go Compiler
+Online C Compiler
+Online C++ Compiler
+Online C# Compiler
+Online PHP Compiler
+Online MA TLAB Compiler
+Online Bash T erminal
+Online SQL Compiler
+Online Html Editor
+ABOUT US |OUR TEAM |CAREERS |JOBS|CONT ACT US |TERMS OF USE |
+PRIVACY POLICY |REFUND POLICY |COOKIES POLICY |FAQ'SProgrammatic Exceptions  − These exceptions are thrown explicitly by the application or
+the API progr ammers. Examples: IllegalArgumentEx ception, IllegalStateEx ception.
+Page 16 of 16
+Tutorials P oint is a leading Ed T ech compan y striving to pro vide the best learning material on
+technical and non-technical subjects.
+© Cop yright 2025. All Rights R eserv ed.

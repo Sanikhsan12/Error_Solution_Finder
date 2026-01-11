@@ -1,0 +1,135 @@
+How to Handle a java.lang.ArithmeticException in Java?
+Last Updated : 21 Feb, 2024
+In Java programming, the java.lang.ArithmeticException is an unchecked exception ofarithmetic operations.
+This means you try to divisible by zero, which raises the runtime error. This error can be handled with the
+ArthmeticException.
+ArithmeticException can be defined as a runtime exception that can occur during an arithmetic operation due
+to the exceptional condition. ArithmeticException is part of the java.lang package.
+In this article, we will learn how to handle a java.lang.ArithmeticException in Java.
+Syntax:
+try {
+    // Code that may throw an ArithmeticException
+Example: division by zero, 
+} catch (ArithmeticException e) {
+    // Exception handling code
+    // Handle the ArithmeticException here
+This block is executed when an ArithmeticException is caught
+Example: displaying an error message.
+    
+} finally {
+    // Optional block
+}
+Program to Handle a java.lang.ArithmeticException in Java
+Let us understand programmatically, to handle a java.lang.ArithmeticException.
+// Java program to handle a java.lang.ArithmeticException
+public class GfGArithmeticException 
+{
+    // main method
+    public static void main(String[] args) {
+        int dividend = 10;
+        int divisor = 0;
+        try {
+            // attempting division by zero
+            int result = dividend / divisor;  
+            // print the result
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            // print the error
+            System.out.println("ArithmeticException occurred: " + e.getMessage());
+            
+        } finally {
+            System.out.println("This is the example of the ArithmeticException");
+            Java Tutorial Advanced Java Interview Questions Exercises Examples Quizzes Projects Cheatsheet DSA in Java Java Collection
+Comment seepan… Follow
+Article Tags: Java Java Programs Java-Exceptions Java-Exception Handling +1 More
+Explore
+Java Basics
+OOP & Interfaces
+Collections
+Exception Handling
+Java Advanced
+Practice JavaOutput
+ArithmeticException occurred: / by zero
+This is the example of the ArithmeticException
+Explanation of the above Program:
+The above Java program is an example of the ArithmeticException.
+When we try to attempt dividing by zero, then try block raises the exception during the execution of the
+program.
+Then catch can take control and handle the exception and print the error of which type Exception can occur
+in the Java program.
+S
+ 0
+Corporate & Commun ications Address:
+A-143, 7th Floor, Sovereign Corporate
+Tower, Sector- 136, Noida, Uttar
+Pradesh (201305)
+Registered Address:
+K 061, Tower K, Gulshan Vivante
+Apartment, Sector 137, Noida, Gautam
+Buddh Nagar, Uttar Pradesh, 201305
+Company
+About Us
+Legal
+Privacy
+Policy
+Contact Us
+Advertise
+with us
+GFG
+Corporate
+Solution
+Campus
+Training
+ProgramExplore
+POTD
+Job-A-
+Thon
+Blogs
+Nation
+Skill UpTutorials
+Programming
+Languages
+DSA
+Web
+Technology
+AI, ML &
+Data Science
+DevOps
+CS Core
+Subjects
+Interview
+PreparationCourses
+ML and Data
+Science
+DSA and
+Placements
+Web
+Development
+Programming
+Languages
+DevOps &
+Cloud
+GATE
+Trending
+TechnologiesVideos
+DSA
+Python
+Java
+C++
+Web
+Development
+Data Science
+CS SubjectsPreparation
+Corner
+Interview
+Corner
+Aptitude
+Puzzles
+GfG 160
+System Design        }
+    }
+}
+
+Software and
+Tools
+@GeeksforGeeks, Sanchhaya Education Private Limited,All rights reserved

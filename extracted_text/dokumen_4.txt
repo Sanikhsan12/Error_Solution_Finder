@@ -1,0 +1,367 @@
+Page 1 of 12
+Python - Exceptions Handling
+Exception Handling in Python
+Exception handling in Python refers to managing runtime errors that ma y occur during the
+execution of a progr am. In Python, ex ceptions are r aised when errors or unexpected situations
+arise during progr am ex ecution, such as division b y zero, trying to access a file that does not exist,
+or attempting to perform an oper ation on incompatible data t ypes.
+Python pro vides two v ery important features to handle an y unexpected error in y our Python
+progr ams and to add debugging capabilities in them −
+Exception Handling  − This would be covered in this tutorial. Here is a list of standa rd
+Exceptions a vailable in Python: Standard Ex ceptions .
+Assertions  − This would be co vered in Assertions in Python  tutorial.
+Advertisement
+ Home  Whiteboard  Graphing Calculator  Online Compilers  Practice  Articles  T
+Chapters Categories
+Page 2 of 12
+Assertions in Python
+An assertion is a sanit y-check that y ou can turn on or turn off when y ou are done with y our testing
+of the progr am.
+The easiest w ay to think of an assertion is to lik en it to a raise-if  statement (or to be more
+accur ate, a r aise-if -not statement). An expression is tested, and if the result comes up false, an
+exception is r aised.
+Progr ammers often place assertions at the start of a function to check for v alid input, and after a
+function call to check for v alid output.
+The assert Statement
+When it encounters an assert statement, Python ev aluates the accompan ying expression, which is
+hopefully true. If the expression is false, Python r aises an AssertionError  exception.
+The syntax  for assert is −
+assert Expression [, Arguments ]
+If the assertion fails, Python uses ArgumentExpression as the argument for the AssertionError .
+AssertionError ex ceptions can be caught and handled lik e any other ex ception using the try -except
+statement, but if not handled, they will terminate the progr am and produce a tr ace back.
+Example
+Here is a function that con verts a temper ature from degrees K elvin to degrees F ahrenheit. Since
+zero degrees K elvin is as cold as it gets, the function bails out if it sees a negativ e temper ature −
+def KelvinToFahrenheit (Temperature ):
+   assert (Temperature >= 0),"Colder than absolute zero!"
+   return ((Temperature -273)*1.8)+32
+print (KelvinToFahrenheit (273))
+print (int(KelvinToFahrenheit (505.78)))
+print (KelvinToFahrenheit (-5))Assertions are carried out by the assert statement, the newest keyword to Python,
+introduced in version 1.5.
+Page 3 of 12
+When the abo ve code is ex ecuted, it produces the following result −
+32.0
+451
+Traceback (most recent call last):
+File "test.py", line 9, in <module>
+print (KelvinToFahrenheit(-5))
+File "test.py", line 4, in KelvinToFahrenheit
+assert (Temperature >= 0),"Colder than absolute zero!"
+AssertionError: Colder than absolute zero!
+What is Exception?
+An ex ception is an ev ent, which occurs during the ex ecution of a progr am that disrupts the normal
+flow of the progr am's instructions. In gener al, when a Python script encounters a situation that it
+cannot cope with, it r aises an ex ception. An ex ception is a Python object that represents an error .
+When a Python script r aises an ex ception, it must either handle the ex ception immediately
+otherwise it terminates and quits.
+Handling an Exception in Python
+If you ha ve some suspicious code that ma y raise an ex ception, y ou can defend y our progr am by
+placing the suspicious code in a try: block. After the try: block, include an except : statement,
+followed b y a block of code which handles the problem as elegantly as possible.
+Syntax
+Here is the simple syntax of try...except...else  blocks −
+try:
+   You do your operations here
+   ......................
+except ExceptionI :
+   If there is ExceptionI , then execute this block .
+except ExceptionII :
+   If there is ExceptionII , then execute this block .
+   ......................The try: block contains statements which are susceptible for ex ception
+If exception occurs, the progr am jumps to the except : block.
+If no ex ception in the try: block, the except : block is skipped.
+Page 4 of 12
+else:
+   If there is no exception then execute this block .
+Here are few important points about the abo ve-mentioned syntax −
+Example
+This example opens a file, writes content in the file and comes out gr acefully because there is no
+problem at all.
+try:
+   fh = open("testfile" , "w")
+   fh.write("This is my test file for exception handling!!" )
+except IOError :
+   print ("Error: can\'t find file or read data" )
+else:
+   print ("Written content in the file successfully" )
+   fh.close()
+It will produce the following output  −
+Written content in the file successfully
+Howev er, change the mode par ameter in open() function to "w". If the testfile is not already
+present, the progr am encounters IOError in ex cept block, and prints following error message −
+Error: can't find file or read data
+ExampleA single try statement can have multiple except statements. This is useful when the try
+block contains statements that ma y throw different t ypes of ex ceptions.
+You can also pro vide a generic except  clause, which handles an y exception.
+After the except clause(s), you can include an else clause. The code in the else block
+executes if the code in the try: block does not r aise an ex ception.
+The else block is a good place for code that does not need the try: block's protection.
+Page 5 of 12
+This example tries to open a file where y ou do not ha ve write permission, so it r aises an ex ception
+−
+try:
+   fh = open("testfile" , "r")
+   fh.write("This is my test file for exception handling!!" )
+except IOError :
+   print ("Error: can\'t find file or read data" )
+else:
+   print ("Written content in the file successfully" )
+This produces the following result −
+Error: can't find file or read data
+The except Clause with No Exceptions
+You can also use the ex cept statement with no ex ceptions defined as follows −
+try:
+   You do your operations here ;
+   ......................
+except:
+   If there is any exception , then execute this block .
+   ......................
+else:
+   If there is no exception then execute this block . 
+This kind of a try-except  statement catches all the ex ceptions that occur . Using this kind of try -
+except statement is not considered a good progr amming pr actice though, because it catches all
+exceptions but does not mak e the progr ammer identif y the root cause of the problem that ma y
+occur.
+The except Clause with Multiple Exceptions
+You can also use the same except statement to handle multiple ex ceptions as follows −
+try:
+   You do your operations here ;
+Page 6 of 12
+   ......................
+except(Exception1 [, Exception2 [,...ExceptionN ]]]):
+   If there is any exception from the given exception list, 
+   then execute this block .
+   ......................
+else:
+   If there is no exception then execute this block . 
+The try-ﬁnally Clause
+You can use a finally:  block along with a try: block. The finally block is a place to put an y code
+that must ex ecute, whether the try -block r aised an ex ception or not. The syntax of the try -finally
+statement is this −
+try:
+   You do your operations here ;
+   ......................
+   Due to any exception , this may be skipped .
+finally:
+   This would always be executed .
+   ......................
+You cannot use else clause as well along with a finally clause.
+Example
+try:
+   fh = open("testfile" , "w")
+   fh.write("This is my test file for exception handling!!" )
+finally:
+   print ("Error: can\'t find file or read data" )
+If you do not ha ve permission to open the file in writing mode, then this will produce the following
+result −
+Error: can't find file or read data
+Same example can be written more cleanly as follows −
+Page 7 of 12
+try:
+   fh = open("testfile" , "w")
+   try:
+      fh.write("This is my test file for exception handling!!" )
+   finally:
+      print ("Going to close the file" )
+      fh.close()
+except IOError :
+   print ("Error: can\'t find file or read data" )
+When an ex ception is thrown in the try block, the ex ecution immediately passes to the finally
+block. After all the statements in the finally  block are ex ecuted, the ex ception is r aised again and is
+handled in the except statements if present in the next higher la yer of the try-except statement.
+Argument of an Exception
+An ex ception can ha ve an argument , which is a v alue that giv es additional information about the
+problem. The contents of the argument v ary by exception. Y ou capture an ex ception's argument b y
+supplying a v ariable in the ex cept clause as follows −
+try:
+   You do your operations here ;
+   ......................
+except ExceptionType , Argument :
+   You can print value of Argument here ...
+If you write the code to handle a single ex ception, y ou can ha ve a variable follow the name of the
+exception in the ex cept statement. If y ou are tr apping multiple ex ceptions, y ou can ha ve a variable
+follow the tuple of the ex ception.
+This v ariable receiv es the v alue of the ex ception mostly containing the cause of the ex ception. The
+variable can receiv e a single v alue or multiple v alues in the form of a tuple. This tuple usually
+contains the error string, the error number , and an error location.
+Example
+Following is an example for a single ex ception −
+Page 8 of 12
+# Define a function here.
+def temp_convert (var):
+   try:
+      return int(var)
+   except ValueError as Argument :
+      print ("The argument does not contain numbers\n" , Argument )
+# Call above function here.
+temp_convert ("xyz")
+This produces the following result −
+The argument does not contain numbers
+invalid literal for int() with base 10: 'xyz'
+Raising an Exceptions
+You can r aise ex ceptions in sev eral ways by using the r aise statement. The gener al syntax for the
+raise  statement is as follows.
+Syntax
+raise [Exception [, args [, traceback]]]
+Here, Exception  is the t ype of ex ception (for example, NameError) and argument  is a v alue for the
+exception argument. The argument is optional; if not supplied, the ex ception argument is None.
+The final argument, tr ace back, is also optional (and r arely used in pr actice), and if present, is the
+traceback object used for the ex ception.
+Example
+An ex ception can be a string, a class or an object. Most of the ex ceptions that the Python core
+raises are classes, with an argument that is an instance of the class. Defining new ex ceptions is
+quite easy and can be done as follows −
+def functionName ( level ):
+   if level < 1:
+      raise "Invalid level!" , level
+      # The code below to this would not be executed
+      # if we raise the exception
+Page 9 of 12
+Note:  In order to catch an ex ception, an "ex cept" clause must refer to the same ex ception thrown
+either class object or simple string. F or example, to capture abo ve exception, we must write the
+except clause as follows −
+try:
+   Business Logic here ...
+except "Invalid level!" :
+   Exception handling here ...
+else:
+   Rest of the code here ...
+User-Deﬁned Exceptions
+Python also allows y ou to create y our own ex ceptions b y deriving classes from the standard built -
+in exceptions.
+Here is an example related to RuntimeError . Here, a class is created that is subclassed from
+RuntimeError . This is useful when y ou need to displa y more specific information when an ex ception
+is caught.
+In the try block, the user -defined ex ception is r aised and caught in the ex cept block. The v ariable e
+is used to create an instance of the class Network error.
+class Networkerror (RuntimeError ):
+   def __init__ (self, arg):
+      self.args = arg
+So once y ou defined abo ve class, y ou can r aise the ex ception as follows −
+try:
+   raise Networkerror ("Bad hostname" )
+except Networkerror ,e:
+   print (e.args)
+Standard Exceptions
+Here is a list of Standard Ex ceptions a vailable in Python −
+Sr.No. Exception Name & Description
+1Exception
+Base class for all ex ceptions
+Page 10 of 12
+2StopIteration
+Raised when the next() method of an iter ator does not point to an y object.
+3SystemExit
+Raised b y the sys.exit() function.
+4StandardError
+Base class for all built -in ex ceptions ex cept StopIter ation and S ystemExit.
+5ArithmeticError
+Base class for all errors that occur for numeric calculation.
+6OverflowError
+Raised when a calculation ex ceeds maximum limit for a numeric t ype.
+7FloatingPointError
+Raised when a floating point calculation fails.
+8ZeroDivisionError
+Raised when division or modulo b y zero tak es place for all numeric t ypes.
+9AssertionError
+Raised in case of failure of the Assert statement.
+10AttributeError
+Raised in case of failure of attribute reference or assignment.
+11EOFError
+Raised when there is no input from either the r aw_input() or input() function and the
+end of file is reached.
+12ImportError
+Raised when an import statement fails.
+13KeyboardInterrupt
+Raised when the user interrupts progr am ex ecution, usually b y pressing Ctrl+c.
+14LookupError
+Base class for all lookup errors.
+15IndexError
+Raised when an index is not found in a sequence.
+16KeyError
+Raised when the specified k ey is not found in the dictionary .
+17NameError
+Raised when an identifier is not found in the local or global namespace.
+18 UnboundLocalError
+Page 11 of 12
+TOP TUTORIALS
+Python T utorial
+Java TutorialTRENDING TECHNOLOGIES
+Cloud Computing T utorial
+Amaz on Web Services T utorialRaised when trying to access a local v ariable in a function or method but no v alue has
+been assigned to it.
+19EnvironmentError
+Base class for all ex ceptions that occur outside the Python en vironment.
+20IOError
+Raised when an input/ output oper ation fails, such as the print statement or the open()
+function when trying to open a file that does not exist.
+21IOError
+Raised for oper ating system-related errors.
+22SyntaxError
+Raised when there is an error in Python syntax.
+23IndentationError
+Raised when indentation is not specified properly .
+24SystemError
+Raised when the interpreter finds an internal problem, but when this error is
+encountered the Python interpreter does not exit.
+25SystemExit
+Raised when Python interpreter is quit b y using the sys.exit() function. If not handled
+in the code, causes the interpreter to exit.
+26TypeError
+Raised when an oper ation or function is attempted that is in valid for the specified data
+type.
+27ValueError
+Raised when the built -in function for a data t ype has the v alid type of arguments, but
+the arguments ha ve invalid v alues specified.
+28RuntimeError
+Raised when a gener ated error does not fall into an y category .
+29NotImplementedError
+Raised when an abstr act method that needs to be implemented in an inherited class is
+not actually implemented.
+Page 12 of 12
+C++ T utorial
+C Progr amming T utorial
+C# Tutorial
+PHP T utorial
+R Tutorial
+HTML T utorial
+CSS Tutorial
+JavaScript T utorial
+SQL T utorialMicrosoft Azure T utorial
+Git Tutorial
+Ethical Hacking T utorial
+Docker Tutorial
+Kubernetes T utorial
+DSA Tutorial
+Spring Boot T utorial
+SDLC Tutorial
+Unix T utorial
+CERTIFICATIONS
+Business Analytics Certification
+Java & Spring Boot Adv anced Certification
+Data Science Adv anced Certification
+Cloud Computing And DevOps
+Advanced Certification In Business Analytics
+Artificial Intelligence And Machine Learning
+DevOps Certification
+Game Dev elopment Certification
+Front-End Dev eloper Certification
+AWS Certification T raining
+Python Progr amming CertificationCOMPILERS & EDITORS
+Online Ja va Compiler
+Online Python Compiler
+Online Go Compiler
+Online C Compiler
+Online C++ Compiler
+Online C# Compiler
+Online PHP Compiler
+Online MA TLAB Compiler
+Online Bash T erminal
+Online SQL Compiler
+Online Html Editor
+ABOUT US |OUR TEAM |CAREERS |JOBS|CONT ACT US |TERMS OF USE |
+PRIVACY POLICY |REFUND POLICY |COOKIES POLICY |FAQ'S
+Tutorials P oint is a leading Ed T ech compan y striving to pro vide the best learning material on
+technical and non-technical subjects.
+© Cop yright 2025. All Rights R eserv ed.
