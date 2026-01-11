@@ -29,10 +29,10 @@
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-200 min-h-screen flex flex-col items-center py-10 px-4">
+<body class="bg-slate-950 text-slate-200 min-h-screen flex flex-col items-center px-4 transition-all duration-500 {{ 'justify-center' if not results else 'py-10 mb-10' }}">
 
     <!-- Header / Hero -->
-    <header class="w-full max-w-4xl mb-10 text-center space-y-4">
+    <header class="w-full max-w-4xl text-center space-y-4 {{ 'mb-8' if not results else 'mb-10' }}">
         <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
             Error Solution Finder
         </h1>
