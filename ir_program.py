@@ -26,7 +26,7 @@ class IREngine:
         if not isinstance(text, str): return []
         # ? Tokenisasi
         tokens = nltk.word_tokenize(text.lower())
-        # ? Stemming & Stopword Removal
+        # ? Stemming, Stopword Removal & Alphanumeric Filtering
         cleaned = [self.stemmer.stem(w) for w in tokens if w.isalnum() and w not in self.stop_words]
         return cleaned
 
