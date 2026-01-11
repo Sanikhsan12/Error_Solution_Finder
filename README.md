@@ -1,6 +1,6 @@
 # Error Solution Finder (Sistem Information Retrieval)
 
-![Project Banner](https://via.placeholder.com/1200x400?text=Error+Solution+Finder)
+<img width="1916" height="964" alt="Image" src="https://github.com/user-attachments/assets/601b3dde-9904-4190-80b9-83cd4a60a9d9" />
 
 Aplikasi pencarian solusi error pemrograman berbasis web yang menggunakan **Semantic Search** (Word Embedding & Cosine Similarity) untuk menemukan dokumen relevan dari korpus solusi error.
 
