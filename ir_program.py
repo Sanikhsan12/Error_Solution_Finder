@@ -60,14 +60,19 @@ class IREngine:
         self.embeddings = self.model.encode(all_texts)
 
     # ! Search Function
-    def search(self, query, top_n=3):
+    # ! Search Function dengan Threshold
+    def search(self, query, top_n=3, threshold=0.4): 
         query_vec = self.model.encode([query])[0]
         scores = []
         for i, doc_vec in enumerate(self.embeddings):
             sim = self.get_cosine_similarity(query_vec, doc_vec)
-            scores.append((i, sim))
+            
+            # ? Cek threshold
+            if sim >= threshold:
+                scores.append((i, sim))
         
         scores.sort(key=lambda x: x[1], reverse=True)
+    
         return scores[:top_n]
 
     # ! Generate Summary
